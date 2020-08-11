@@ -3,11 +3,11 @@ export default [
   {
     title: "起步",
     icon: "bank",
-    key: "start",
+    key: "hello",
     children: [
       {
         title: "Hello World",
-        demoLink: "./start/hello.html"
+        demoLink: "./hello/helloWorld.html"
       }
     ]
   },

@@ -26,9 +26,19 @@
       }
     })
 
+    // const ground = ssp.createGround({
+    //   imgUrl: '../../asstes/img/ground/004.jpg',
+    //   width: 500,
+    //   height: 500,
+    //   opacity: 1,
+    //   position: { x: 0, y: 0, z: 0 },
+    //   repeat: { width: 10, height: 10 }
+    // })
+
     ssp.loadModel({
       id: 'firstGltfGroup',
       url: '../../asstes/model/Fbx/dt/DTdh.fbx',
+      position: { x: 0, y: 20, z: 0 },
       onClick() {
         console.log('model self click', this)
       }

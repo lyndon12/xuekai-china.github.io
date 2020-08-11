@@ -75,31 +75,22 @@
 
           if (mode === 'opacity') {
 
-            // ssp.unOpacityShow()
-            //   .then(() => {
-                ssp.opacityShow(model, { opacity: 0.4, color: 0xffffff })
-              // })
+            ssp.opacityShow(model, { opacity: 0.4, color: 0xffffff })
 
           } else if (mode === 'edge') {
 
-            ssp.unEdgeShow()
-              .then(() => {
-                ssp.edgeShow(model, { color: 0xff0000 })
-              })
+            ssp.edgeShow(model, { color: 0xff0000 })
 
           } else if (mode === 'emissive') {
 
-            ssp.unEmissiveShow()
-              .then(() => {
-                ssp.emissiveShow(model, {
-                  isAnimation: true,
-                  color: 0xff0000,
-                  repeat: true,
-                  duration: 1000,
-                  maxOpacity: 1,
-                  minOpacity: 0
-                })
-              })
+            ssp.emissiveShow(model, {
+              isAnimation: true,
+              color: 0xff0000,
+              repeat: true,
+              duration: 1000,
+              maxOpacity: 1,
+              minOpacity: 0
+            })
 
           }
 

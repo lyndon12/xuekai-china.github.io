@@ -25,11 +25,28 @@
     .trigger:hover {
       color: #1890ff;
     }
+
+    #code-button {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+
+      padding: 12px;
+      border-radius: 50%;
+      margin-bottom: 0px;
+
+      background-color: #FFF;
+      opacity: .9;
+      z-index: 999;
+
+      box-shadow: 0 0 4px rgba(0, 0, 0, .15);
+    }
   </style>
 </head>
 
 <body>
   <div id="app"></div>
+
   <script src="../lib/polyfill.min.js"></script>
   <script src="../lib/vue/vue.min.js"></script>
   <script src="../lib/antd-vue/antd.min.js"></script>
@@ -37,7 +54,7 @@
 
     import demoList from './demoList.js'
 
-    let hash = 'start_hello'
+    let hash = 'hello_helloWorld'
 
     var app = new Vue({
       el: '#app',
@@ -92,9 +109,11 @@
         <iframe
           height="100%"
           width="100%"
+          style="border: none"
           :src="iframeLink"
-          frameborder="0"
+          allowfullscreen allowvr onmousewheel=""
         ></iframe>
+        <a id="code-button" target="_blank" :href="codeBtnHref"><img src="./close_black.svg"></a>
       </a-layout-content>
     </a-layout>
   </a-layout>
@@ -106,6 +125,11 @@
         demoList,
         openKeys: [],
         selectedKeys: []
+      },
+      computed: {
+        codeBtnHref: function () {
+          return "https://github.com/xuekai-china/xuekai-china.github.io/tree/master/soonspacejs/page/" + this.iframeLink
+        }
       },
       methods: {
         _initLoadPage() {
@@ -124,6 +148,8 @@
 
             this.iframeLink = iframeLink
 
+            console.log(this.iframeLink)
+
           })
 
         },
@@ -137,6 +163,8 @@
             window.location.hash = hash;
 
             this.iframeLink = key;
+
+            console.log(this.iframeLink)
 
           })
 

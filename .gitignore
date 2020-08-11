@@ -1,0 +1,9 @@
+# Test
+soonspacejs/page/test
+soonspacejs/asstes/testModel
+
+# Big file
+soonspacejs/asstes/model/json/1_line.json
+
+# Private file
+soonspacejs/sdk/index.sbm.js
