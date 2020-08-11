@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SoonSpace Example</title>
+  <link rel="stylesheet" href="../../asstes/css/base.css">
+  <link rel="stylesheet" href="../../asstes/css/tool.css">
+</head>
+
+<body>
+  <div id="view">
+    <div class="right-top-toolBax">
+      <div class="line">
+        <button id="drawPoint">绘制点</button>
+      </div>
+      <div class="line">
+        <button id="drawLine">绘制线</button>
+      </div>
+      <div class="line">
+        <button id="drawFace">绘制面</button>
+      </div>
+      <div class="line">
+        <button id="drawFence">绘制围栏</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../sdk/index.js"></script>
+  <script>
+
+    document.getElementById('drawPoint').onclick = function () {
+      ssp.drawPoints({
+        id: 'drawPoint',
+        size: 20,
+        color: 'green'
+      })
+        .then(res => console.log(res))
+    }
+
+    document.getElementById('drawLine').onclick = function () {
+      ssp.drawLine({
+        id: 'drawLine',
+        color: 'red'
+      })
+        .then(res => console.log(res))
+    }
+
+    document.getElementById('drawFace').onclick = function () {
+      ssp.drawFace({
+        id: 'drawFace',
+        color: 'yellow'
+      })
+        .then(res => console.log('drawFace', res))
+
+    }
+
+    document.getElementById('drawFence').onclick = function () {
+      ssp.drawFence({
+        id: 'drawFence',
+        color: 'violet',
+        height: 200,
+        offsetY: 10
+      })
+        .then(res => console.log(res))
+    }
+
+    const ssp = new SoonSpace({
+      el: '#view',
+      option: {
+        backgroundColor: 0x333300,
+        showGrid: false
+      },
+      events: {}
+    })
+
+    ssp.createGround({
+      imgUrl: '../../asstes/img/ground/001.jpg',
+      width: 500,
+      height: 300,
+      position: { x: 0, y: 0, z: 0 }
+    })
+
+  </script>
+</body>
+
+</html>

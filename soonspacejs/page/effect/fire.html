@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SoonSpace Example</title>
+  <link rel="stylesheet" href="../../asstes/css/base.css">
+</head>
+
+<body>
+  <div id="view"></div>
+  <script src="../../sdk/index.sbm.js"></script>
+  <script>
+
+    const ssp = new SoonSpace({
+      el: '#view',
+      option: {
+        showInfo: true,
+        backgroundColor: 0x30030,
+      },
+      events: {}
+    })
+
+    ssp.createFire({
+      texturePath: '../../asstes/img/effect/fire.png',
+      position: {
+        x: 0,
+        y: 0,
+        z: 0
+      },
+      scale: {
+        x: 10,
+        y: 10,
+        z: 10
+      },
+      name: 'a'
+    })
+
+  </script>
+</body>
+
+</html>

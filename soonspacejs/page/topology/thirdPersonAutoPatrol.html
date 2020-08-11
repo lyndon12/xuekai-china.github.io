@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SoonSpace Example</title>
+  <link rel="stylesheet" href="../../asstes/css/base.css">
+  <link rel="stylesheet" href="../../asstes/css/tool.css">
+</head>
+
+<body>
+  <div id="view">
+    <div class="right-top-toolBax">
+      <div class="line">
+        <label for="noRotate">场景旋转</label>
+        <input type="checkbox" name="noRotate" id="noRotate" checked />
+      </div>
+      <div class="line">
+        <button id="getShortestPath">获取最短路径</button>
+      </div>
+      <div class="line hide">
+        <button id="startNav">开始导航</button>
+      </div>
+      <div class="line hide">
+        <button id="pauseNav">暂停</button>
+      </div>
+      <div class="line hide">
+        <button id="stopNav">结束</button>
+      </div>
+      <div class="line hide">
+        <button id="toThirdPerson">第三人称</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../sdk/index.js"></script>
+  <script src="../../lib//vconsole.min.js"></script>
+  <script>
+
+    const vConsole = new VConsole();
+
+    let pathGroup = null
+    let shortestPath = null
+    let patrol = null
+    let isPause = false
+
+    const noRotate = document.getElementById('noRotate')
+    const getPathBtn = document.getElementById('getShortestPath')
+    const startBtn = document.getElementById('startNav')
+    const pauseBtn = document.getElementById('pauseNav')
+    const stopBtn = document.getElementById('stopNav')
+    const toThirdPersonBtn = document.getElementById('toThirdPerson')
+
+    let dot = null
+
+    // 模拟箭头角度旋转
+    function mockArrowRotate(arrow, ssp) {
+      // 一个单位旋转弧度
+      const oneDeg = Math.PI / 188
+
+      // 0 到 360 的随机树数
+      function getRandom0To360() {
+
+        const a = Math.floor(Math.random() * 4) * 100
+        const b = Math.floor(Math.random() * 7) * 10
+
+        let c = 0
+
+        if (a !== 300 || b !== 60) c = Math.floor(Math.random() * 10)
+
+        return a + b + c
+
+      }
+
+      // 每秒随机改变箭头的方向
+      setInterval(() => {
+
+        ssp.nextRender(() => {
+
+          arrow.rotation.z = getRandom0To360() * oneDeg
+
+        })
+
+      }, 1000)
+    }
+
+    noRotate.onchange = function (e) {
+
+      ssp.viewport.controls.enableRotate = e.target.checked
+
+    }
+
+    getPathBtn.onclick = function () {
+
+      if (!pathGroup) alert('请等待模型与路径加载完成后再试！')
+
+      shortestPath = ssp.getShortestPath({
+        topology: pathGroup.children[0],
+        positions: {
+          start: {
+            x: 2573,
+            y: 2,
+            z: -582
+          },
+          end: {
+            x: 4522,
+            y: 2,
+            z: 5257
+          }
+        },
+        restrict: null,
+        color: 0xff0000
+      })
+
+      if (!!shortestPath) {
+
+        startBtn.parentNode.classList.remove('hide')
+        startBtn.parentNode.classList.add('show')
+
+      } else alert('未能计算出俩点直接的最短路径！')
+
+    }
+
+    startBtn.onclick = function () {
+
+      // 圆点
+      dot = ssp.renderPoints({
+        points: [{ x: 0, y: 20, z: 0 }],
+        id: 'points',
+        size: 20,
+        color: 'yellow'
+      })
+
+      // 箭头
+      const imgEl = document.createElement('img')
+      imgEl.width = 100
+      imgEl.height = 100
+      imgEl.src = 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=593574568,3355290888&fm=15&gp=0.jpg'
+
+      const arrow = ssp.createPoiNode({
+        type: '3D',
+        id: 'patrolArrow',
+        element: imgEl,
+        position: {
+          x: 10,
+          y: 0,
+          z: 10
+        },
+        rotation: {
+          x: Math.PI / 2,
+          y: 0,
+          z: 0
+        }
+      })
+
+      // 把箭头加到圆点内部
+      dot.add(arrow)
+
+      patrol = ssp.autoPatrol({
+        mode: 'thirdPerson',
+        lookAtY: 100,
+        path: shortestPath,
+        naviSpeed: 1,
+        person: dot,
+        refresh: false,
+        navigatedOption: {
+          radius: 20,
+          color: 'yellow'
+        },
+        onModeChange: mode => {
+          if (mode === 'firstPerson') {
+            toThirdPersonBtn.parentNode.classList.remove('hide')
+            toThirdPersonBtn.parentNode.classList.add('show')
+          }
+        },
+        onEnd: () => {}
+      })
+
+      // 模拟箭头角度旋转
+      mockArrowRotate(arrow, ssp)
+
+      pauseBtn.parentNode.classList.remove('hide')
+      pauseBtn.parentNode.classList.add('show')
+
+      stopBtn.parentNode.classList.remove('hide')
+      stopBtn.parentNode.classList.add('show')
+
+    }
+
+    pauseBtn.onclick = function () {
+
+      isPause = !isPause
+
+      if (isPause) {
+
+        patrol.pause()
+        pauseBtn.innerHTML = '开始'
+
+      } else {
+
+        patrol.following()
+        pauseBtn.innerHTML = '暂停'
+
+      }
+
+    }
+
+    stopBtn.onclick = function () {
+
+      patrol.stop()
+
+      pathGroup = null
+      shortestPath = null
+      patrol = null
+      isPause = false
+
+      startBtn.parentNode.classList.remove('show')
+      startBtn.parentNode.classList.add('hide')
+
+      pauseBtn.parentNode.classList.remove('show')
+      pauseBtn.parentNode.classList.add('hide')
+
+      stopBtn.parentNode.classList.remove('show')
+      stopBtn.parentNode.classList.add('hide')
+
+    }
+
+    toThirdPersonBtn.onclick = function () {
+      patrol.modeChange('thirdPerson')
+    }
+
+    const ssp = new SoonSpace({
+      el: '#view',
+      option: {
+        showInfo: true
+      },
+      events: {
+        selectPosition(position) {
+
+          // 视角调到合适的位置和角度，点击屏幕取到数据传值给 setCameraViewpoint
+          // console.log('cameraViewpoint', ssp.getCameraViewpoint())
+
+        }
+      }
+    })
+
+    ssp.loadXml({ id: 'xml' }, '../../asstes/model/sbm/hzl/hzl.xml')
+      .then(() => ssp.loadGml({ id: 'gml' }, '../../asstes/model/sbm/hzl/hzl.gml'))
+      .then(group => {
+
+        pathGroup = group
+
+        // 设置相机位置和角度，数据由 getCameraViewpoint 获得
+        ssp.setCameraViewpoint(
+          {
+            position: { x: 644.4253145482462, y: 5108.280365691723, z: 8026.066131923097 },
+            rotation: { x: -0.7678438918681174, y: -0.07900113547804946, z: -0.07604883051072436 }
+          }
+        )
+
+      })
+  </script>
+</body>
+
+</html>

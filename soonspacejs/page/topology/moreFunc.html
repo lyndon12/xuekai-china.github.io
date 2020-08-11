@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SoonSpace Example</title>
+  <link rel="stylesheet" href="../../asstes/css/base.css">
+  <link rel="stylesheet" href="../../asstes/css/tool.css">
+</head>
+
+<body>
+  <div id="view">
+    <div class="right-top-toolBax">
+      <div class="line">
+        <button id="getShortestPath">获取最短路径</button>
+      </div>
+      <div class="line hide">
+        <button id="startNav">开始导航</button>
+      </div>
+      <div class="line hide">
+        <button id="pauseNav">暂停</button>
+      </div>
+      <div class="line hide">
+        <button id="stopNav">结束</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../sdk/index.js"></script>
+  <script>
+
+    let pathGroup = null
+    let shortestPath = null
+    let patrol = null
+    let isPause = false
+
+    const startBtn = document.getElementById('startNav')
+    const pauseBtn = document.getElementById('pauseNav')
+    const stopBtn = document.getElementById('stopNav')
+
+    document.getElementById('getShortestPath').onclick = function () {
+
+      if (!pathGroup) alert('请等待模型与路径加载完成后再试！')
+
+      shortestPath = ssp.getShortestPath({
+        topology: pathGroup.children[0],
+        positions: {
+          start: {
+            x: 2573,
+            y: 2,
+            z: -582
+          },
+          end: {
+            x: 4522,
+            y: 2,
+            z: 5257
+          }
+        },
+        restrict: null,
+        color: 0xff0000
+      })
+
+      if (!!shortestPath) {
+
+        startBtn.parentNode.classList.remove('hide')
+        startBtn.parentNode.classList.add('show')
+
+      } else alert('未能计算出俩点直接的最短路径！')
+
+    }
+
+    startBtn.onclick = function () {
+
+      patrol = ssp.autoPatrol({
+        mode: 'firstPerson',
+        lookAtY: 0,
+        path: shortestPath,
+        naviSpeed: 3,
+        onEnd: () => console.log('onEnd')
+      })
+
+      pauseBtn.parentNode.classList.remove('hide')
+      pauseBtn.parentNode.classList.add('show')
+
+      stopBtn.parentNode.classList.remove('hide')
+      stopBtn.parentNode.classList.add('show')
+
+    }
+
+    pauseBtn.onclick = function () {
+
+      isPause = !isPause
+
+      if (isPause) {
+
+        patrol.pause()
+        pauseBtn.innerHTML = '开始'
+
+      } else {
+
+        patrol.following()
+        pauseBtn.innerHTML = '暂停'
+
+      }
+
+    }
+
+    stopBtn.onclick = function () {
+
+      patrol.stop()
+
+      pathGroup = null
+      shortestPath = null
+      patrol = null
+      isPause = false
+
+      startBtn.parentNode.classList.remove('show')
+      startBtn.parentNode.classList.add('hide')
+
+      pauseBtn.parentNode.classList.remove('show')
+      pauseBtn.parentNode.classList.add('hide')
+
+      stopBtn.parentNode.classList.remove('show')
+      stopBtn.parentNode.classList.add('hide')
+
+    }
+
+    const ssp = new SoonSpace({
+      el: '#view',
+      option: {
+        showInfo: true
+      },
+      events: {
+
+      }
+    })
+
+    ssp.loadXml({ id: 'xml' }, '../../asstes/model/sbm/hzl/hzl.xml')
+      .then(() => ssp.loadGml({ id: 'gml' }, '../../asstes/model/sbm/hzl/hzl.gml'))
+      .then(group => {
+
+        pathGroup = group
+
+        ssp.flyMainViewpoint()
+
+      })
+
+  </script>
+</body>
+
+</html>

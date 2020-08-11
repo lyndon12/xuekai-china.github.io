@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SoonSpace Example</title>
+  <link rel="stylesheet" href="../../asstes/css/base.css">
+</head>
+
+<body>
+  <div id="view"></div>
+  <script src="../../sdk/index.js"></script>
+  <script>
+
+    const ssp = new SoonSpace({
+      el: '#view',
+      option: {
+        showInfo: true,
+      },
+      events: {
+        modelClick(param) {
+          console.log(param)
+        }
+      }
+    })
+
+    ssp.loadModel({
+      id: 'firstGltfGroup',
+      url: '../../asstes/model/Fbx/dt/DTdh.fbx',
+      onClick() {
+        console.log('model self click', this)
+      }
+    })
+      .then(fbx => {
+        console.log(fbx)
+
+        ssp.flyToObj(fbx)
+      })
+
+  </script>
+</body>
+
+</html>

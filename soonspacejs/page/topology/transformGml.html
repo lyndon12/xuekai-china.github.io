@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SoonSpace Example</title>
+  <link rel="stylesheet" href="../../asstes/css/base.css">
+</head>
+
+<body>
+  <div id="view"></div>
+  <script src="../../sdk/index.js"></script>
+  <script src="../../utils/gui.js"></script>
+
+  <script>
+
+    let gmlObj, transform;
+
+    const ssp = new SoonSpace({
+      el: '#view',
+      option: {
+        showGrid: true
+      },
+      events: {}
+    })
+
+    ssp.loadXml({ id: 'hzl' }, '../../asstes/model/sbm/hzl/hzl.xml')
+
+      .then(() => ssp.loadGml({ id: 'gml' }, '../../asstes/model/sbm/hzl/hzl.gml'))
+      .then(gml => {
+
+        gmlObj = gml
+
+        return ssp.flyMainViewpoint()
+
+      })
+      .then(() => {
+        transform = ssp.createTransform('gmlTransform', {
+          object: gmlObj,
+          mode: 'translate',
+        })
+      })
+
+    const gui = new GUI({
+      el: '#view'
+    })
+
+    gui.addButton({
+      text: '移动',
+      onClick() {
+        transform.changeMode('translate')
+      }
+    })
+
+    gui.addButton({
+      text: '旋转',
+      onClick() {
+        transform.changeMode('rotate')
+      }
+    })
+
+    gui.addButton({
+      text: '缩放',
+      onClick() {
+        transform.changeMode('scale')
+      }
+    })
+
+    gui.addButton({
+      text: '打印 GML 对象',
+      onClick() {
+        console.log(gmlObj)
+      }
+    })
+
+  </script>
+</body>
+
+</html>

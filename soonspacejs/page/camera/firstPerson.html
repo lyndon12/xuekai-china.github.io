@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SoonSpace Example</title>
+  <link rel="stylesheet" href="../../asstes/css/base.css">
+</head>
+
+<body>
+  <div id="view"></div>
+
+  <script src="../../sdk/index.js"></script>
+  <script>
+
+    const ssp = new SoonSpace({
+      el: '#view',
+      option: {
+        backgroundColor: 0x333300
+      },
+      events: {
+        selectPosition(position) {
+          console.log('selectPosition', position)
+        },
+        modelClick(param) {
+          console.log(param)
+        }
+      }
+    })
+
+    const xmlUrl = '../../asstes/model/sbm/hzl/hzl.xml'
+
+    ssp.loadXml(
+      {
+        id: 'firstPerson',
+        name: 'name_firstPerson',
+        level: 70000
+      },
+      xmlUrl
+    )
+      .then(model => {
+        console.log('model', model)
+
+        ssp.startFirstPerson({
+          startPosition: { x: 27, y: 2, z: 60 },
+          moveSpeed: 3.0,
+          rotationSpeed: 1.0,
+          jumpSpeed: 3.0,
+          // enableClash: false,
+          // enableGravity: false,
+          // onClashUpdate(objects) {
+          //   console.log(objects)
+          // }
+        })
+      })
+
+  </script>
+</body>
+
+</html>

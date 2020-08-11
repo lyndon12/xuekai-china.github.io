@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SoonSpace Example</title>
+  <link rel="stylesheet" href="../../asstes/css/base.css">
+  <link rel="stylesheet" href="../../asstes/css/tool.css">
+</head>
+
+<body>
+  <div id="view">
+    <div class="right-top-toolBax">
+      <div class="line">
+        <button id="flyToMain">飞向主场景</button>
+      </div>
+      <div class="line">
+        <button id="flyTo">飞向一点</button>
+      </div>
+      <div class="line">
+        <button id="flyToPoi">飞向 POI</button>
+      </div>
+      <div class="line">
+        <button id="flyToModel">飞向模型</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../sdk/index.js"></script>
+  <script>
+
+    let lastEnd = true
+    let model = null
+
+    document.getElementById('flyToMain').onclick = function () {
+
+      if (!lastEnd) return alert('请等待上一次结束！')
+
+      ssp.flyMainViewpoint()
+        .then(res => {
+          lastEnd = true
+
+          console.log('flyMainViewpoint done', res)
+        })
+
+    }
+
+    document.getElementById('flyTo').onclick = function () {
+
+      if (!lastEnd) return alert('请等待上一次结束！')
+
+      lastEnd = false
+
+      // flyTo
+      ssp.flyTo(
+        {
+          x: 288.60719338783076,
+          y: 86.27686884449517,
+          z: -23.279970149878682
+        },
+        {
+          x: -1.561157219504513,
+          y: 1.3269478591684332,
+          z: 1.5608633816668858
+        },
+        {
+          
+        }
+      )
+        .then(res => {
+          lastEnd = true
+
+          console.log('flyTo done', res)
+        })
+
+    }
+
+    document.getElementById('flyToPoi').onclick = function () {
+
+      if (!lastEnd) return alert('请等待上一次结束！')
+
+      lastEnd = false
+
+      // flyTo
+      ssp.flyToObj(
+        poi,
+        "FRONT",
+        {
+          padding: 100
+        }
+      )
+        .then(res => {
+          lastEnd = true
+
+          console.log('flyToPoi done', res)
+        })
+
+    }
+
+    document.getElementById('flyToModel').onclick = function () {
+
+      if (!lastEnd) return alert('请等待上一次结束！')
+
+      lastEnd = false
+
+      // flyTo
+      ssp.flyToObj(
+        model,
+        "rightTop",
+        {
+
+        }
+      )
+        .then(res => {
+          lastEnd = true
+
+          console.log('flyToModel done', res)
+        })
+
+    }
+
+    const ssp = new SoonSpace({
+      el: '#view',
+      option: {
+        backgroundColor: 0x333300,
+        showGrid: true,
+        
+      },
+      events: {}
+    })
+
+    const poi = ssp.createPoi({
+      id: "icon1",
+      name: "icon1",
+      iconUrl: "../../asstes/img/poi/icon1.png",
+      position: {
+        x: 0,
+        y: 100,
+        z: 0
+      },
+      scale: {
+        width: 1,
+        height: 1
+      }
+    });
+
+    ssp.loadModel({
+      id: 'firstJson',
+      url: '../../asstes/model/json/hmCar.json',
+      rotation: {
+        x: 0,
+        y: Math.PI / 2,
+        z: 0
+      }
+    })
+      .then(res => model = res)
+
+  </script>
+</body>
+
+</html>

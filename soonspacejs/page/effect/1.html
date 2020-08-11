@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SoonSpace Example</title>
+    <link rel="stylesheet" href="../../asstes/css/base.css">
+</head>
+
+<body>
+    <div id="view"></div>
+    <script src="../../sdk/index.js"></script>
+    <script>
+
+        const ssp = new SoonSpace({
+            el: '#view',
+            option: {
+                showInfo: true,
+                showGrid: true,
+                backgroundColor: 0x30030,
+            },
+            events: {}
+        })
+
+        // const THREE = ssp.viewport.THREE
+        // const TWEEN = ssp.viewport.TWEEN
+
+        // function createParticles(startPosition) {
+
+        //     const positions = []
+
+        //     var geom = new THREE.Geometry();
+        //     var material = new THREE.PointCloudMaterial({
+        //         size: 10,
+        //         transparent: false,
+        //         opacity: 0.9,
+        //         vertexColors: false,
+        //         sizeAttenuation: false,
+        //         color: 0xff0000,
+        //         map: THREE.ImageUtils.loadTexture('./star.png')
+        //     });
+
+        //     var range = 500;
+
+        //     for (var i = 0; i < 100; i++) {
+        //         geom.vertices.push(startPosition);
+        //         positions.splice(positions.length + 1, 0, ...startPosition.toArray())
+        //     }
+
+        //     cloud = new THREE.PointCloud(geom, material);
+        //     cloud.name = "particles";
+
+        //     console.log(cloud)
+
+        //     ssp.viewport.scene.add(cloud);
+
+        //     setTimeout(() => {
+
+        //         cloud.geometry.vertices.map((item, index) => {
+
+        //             new TWEEN.Tween(item.clone())
+        //                 .to(new THREE.Vector3(0, 300, 0), 1000)
+        //                 .onUpdate(res => {
+        //                     positions[index * 3] = res.x;
+        //                     positions[index * 3 + 1] = res.y;
+        //                     positions[index * 3 + 2] = res.z;
+
+        //                     cloud.geometry._bufferGeometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+        //                 })
+        //                 .start()
+        //         })
+
+        //     }, 1000)
+
+        // }
+
+        // createParticles(new THREE.Vector3(0, 0, 0))
+
+    </script>
+</body>
+
+</html>

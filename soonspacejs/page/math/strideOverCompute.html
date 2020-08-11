@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SoonSpace Example</title>
+  <link rel="stylesheet" href="../../asstes/css/base.css">
+</head>
+
+<body>
+  <div id="view"></div>
+  <script src="../../sdk/index.js"></script>
+  <script>
+
+    const ssp = new SoonSpace({
+      el: '#view',
+      option: {
+        backgroundColor: 0x333300
+      },
+      events: {
+        selectPosition(position) {
+          console.log(position)
+          console.log(ssp.strideOverCompute(position, points))
+        }
+      }
+    })
+
+    var points = [
+      { x: 0, y: 5, z: 0 },
+      { x: 50, y: 5, z: 0 },
+      { x: 80, y: 5, z: -30 },
+      { x: 30, y: 5, z: -100 },
+      { x: 0, y: 5, z: -30 }
+    ]
+
+    ssp.renderFace({
+      points,
+      opacity: 0.5,
+      color: 'yellow',
+      name: 'face2'
+    })
+
+    ssp.createGround({
+      imgUrl: '../../asstes/img/ground/001.jpg',
+      width: 500,
+      height: 300,
+      position: { x: 0, y: 0, z: 0 }
+    })
+
+    window.onload = function () {
+
+      alert('点击地面后查看控制台输出！！！');
+
+    }
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SoonSpace Example</title>
+  <link rel="stylesheet" href="../../asstes/css/base.css">
+  <link rel="stylesheet" href="../../asstes/css/tool.css">
+</head>
+
+<body>
+  <div id="view">
+    <div class="right-top-toolBax">
+      <div class="line">
+        <span class="line-key">背景图:</span>
+        <span class="line-val">
+          <input id="bgImage" type="text" placeholder="图片链接">
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../sdk/index.js"></script>
+  <script>
+
+    const ssp = new SoonSpace({
+      el: '#view',
+      option: {
+        backgroundColor: 0x333300
+      },
+      events: {
+
+      }
+    })
+
+    ssp.setBackgroundImage('../../asstes/img/background/1.jpg')
+
+    document.getElementById('bgImage').onchange = function (e) {
+
+      ssp.setBackgroundImage(e.target.value)
+
+    }
+
+  </script>
+</body>
+
+</html>

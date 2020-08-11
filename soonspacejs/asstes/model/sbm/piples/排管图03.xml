@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Project>
+    <ProjectInfo gkxmlVersion="1.2">
+        <Title>排管图03</Title>
+    </ProjectInfo>
+    <Building sourceType="GPL" northAxis="0.000000">
+        <EarthReferenceSystem type="WGS84">
+            <altitudeMode>relativeToGround</altitudeMode>
+            <Location>
+                <longitude>30</longitude>
+                <latitude>119</latitude>
+                <altitude>0</altitude>
+            </Location>
+            <Orientation>
+                <heading>0</heading>
+                <tilt>0.0</tilt>
+                <roll>0.0</roll>
+            </Orientation>
+        </EarthReferenceSystem>
+        <ExportOptions>
+            <Item name="floorMerge" value="false" />
+            <Item name="wallMerge" value="false" />
+        </ExportOptions>
+        <Unit>centimeter</Unit>
+        <DefaultBuilding>false</DefaultBuilding>
+        <DefaultFloor>0</DefaultFloor>
+        <Floors>
+            <Floor id="0" name="1F" baseFloor="1" groupID="0" isMain="True">
+                <FileSource name=".\排管图03_1F_0.sbm" type="SBM" />
+                <BoundingBox minimum="-2.767487, 0.000000, -121.881905" maximum="601.488892, 105.000000, 158.749237" />
+            </Floor>
+        </Floors>
+        <SpaceInfo>
+            <Floor id="0" name="1F" longname="1438924366" baseFloor="1" level="0.000000">
+                <Space name="2049203981" longname="Space_15" type="SPACE" posX="299.331665" posY="0.000000" posZ="44.214451" area="84863.54" visible="True" />
+            </Floor>
+        </SpaceInfo>
+        <ObjectHierarchy>
+            <Entity id="0" name="1F" type="Floor" longname="1438924366">
+                <Entity id="74" name="2049203981" longname="Space_15" type="SPACE" posX="299.331665" posY="0.000000" posZ="44.214451" area="84863.54" visible="True" />
+                <Entity id="73" name="CEILING_0_728440160_0" longname="" type="CEILING" visible="True" />
+                <Entity id="75" name="SLAB_0_537073302_LOWER_0" longname="" type="SLAB" visible="True" />
+                <Entity id="92" name="SLAB_0_537073302_SIDE0_0" longname="" type="SLAB" visible="True" />
+                <Entity id="100" name="SLAB_0_537073302_SIDE10_0" longname="" type="SLAB" visible="True" />
+                <Entity id="101" name="SLAB_0_537073302_SIDE11_0" longname="" type="SLAB" visible="True" />
+                <Entity id="93" name="SLAB_0_537073302_SIDE1_0" longname="" type="SLAB" visible="True" />
+                <Entity id="94" name="SLAB_0_537073302_SIDE2_0" longname="" type="SLAB" visible="True" />
+                <Entity id="95" name="SLAB_0_537073302_SIDE3_0" longname="" type="SLAB" visible="True" />
+                <Entity id="88" name="SLAB_0_537073302_SIDE4_0" longname="" type="SLAB" visible="True" />
+                <Entity id="86" name="SLAB_0_537073302_SIDE5_0" longname="" type="SLAB" visible="True" />
+                <Entity id="96" name="SLAB_0_537073302_SIDE6_0" longname="" type="SLAB" visible="True" />
+                <Entity id="97" name="SLAB_0_537073302_SIDE7_0" longname="" type="SLAB" visible="True" />
+                <Entity id="98" name="SLAB_0_537073302_SIDE8_0" longname="" type="SLAB" visible="True" />
+                <Entity id="99" name="SLAB_0_537073302_SIDE9_0" longname="" type="SLAB" visible="True" />
+                <Entity id="102" name="SLAB_0_537073302_UPPER_0" longname="" type="SLAB" visible="True" />
+                <Entity id="91" name="SLAB_0_740897924_LOWER_0" longname="" type="SLAB" visible="True" />
+                <Entity id="77" name="SLAB_0_740897924_SIDE0_0" longname="" type="SLAB" visible="True" />
+                <Entity id="87" name="SLAB_0_740897924_SIDE10_0" longname="" type="SLAB" visible="True" />
+                <Entity id="89" name="SLAB_0_740897924_SIDE11_0" longname="" type="SLAB" visible="True" />
+                <Entity id="78" name="SLAB_0_740897924_SIDE1_0" longname="" type="SLAB" visible="True" />
+                <Entity id="79" name="SLAB_0_740897924_SIDE2_0" longname="" type="SLAB" visible="True" />
+                <Entity id="80" name="SLAB_0_740897924_SIDE3_0" longname="" type="SLAB" visible="True" />
+                <Entity id="81" name="SLAB_0_740897924_SIDE4_0" longname="" type="SLAB" visible="True" />
+                <Entity id="82" name="SLAB_0_740897924_SIDE5_0" longname="" type="SLAB" visible="True" />
+                <Entity id="83" name="SLAB_0_740897924_SIDE6_0" longname="" type="SLAB" visible="True" />
+                <Entity id="84" name="SLAB_0_740897924_SIDE7_0" longname="" type="SLAB" visible="True" />
+                <Entity id="76" name="SLAB_0_740897924_SIDE8_0" longname="" type="SLAB" visible="True" />
+                <Entity id="85" name="SLAB_0_740897924_SIDE9_0" longname="" type="SLAB" visible="True" />
+                <Entity id="90" name="SLAB_0_740897924_UPPER_0" longname="" type="SLAB" visible="True" />
+                <Entity id="72" name="WALL_0_111283915_FW0_LOWER_0" longname="" type="WALL" visible="True" />
+                <Entity id="4" name="WALL_0_111283915_FW0_SIDE0_0" longname="" type="WALL" visible="True" />
+                <Entity id="68" name="WALL_0_111283915_FW0_SIDE1_0" longname="" type="WALL" visible="True" />
+                <Entity id="69" name="WALL_0_111283915_FW0_SIDE2_0" longname="" type="WALL" visible="True" />
+                <Entity id="70" name="WALL_0_111283915_FW0_SIDE3_0" longname="" type="WALL" visible="True" />
+                <Entity id="71" name="WALL_0_111283915_FW0_UPPER_0" longname="" type="WALL" visible="True" />
+                <Entity id="19" name="WALL_0_1311862365_FW0_LOWER_0" longname="" type="WALL" visible="True" />
+                <Entity id="38" name="WALL_0_1311862365_FW0_SIDE0_0" longname="" type="WALL" visible="True" />
+                <Entity id="40" name="WALL_0_1311862365_FW0_SIDE1_0" longname="" type="WALL" visible="True" />
+                <Entity id="42" name="WALL_0_1311862365_FW0_SIDE2_0" longname="" type="WALL" visible="True" />
+                <Entity id="44" name="WALL_0_1311862365_FW0_SIDE3_0" longname="" type="WALL" visible="True" />
+                <Entity id="45" name="WALL_0_1311862365_FW0_UPPER_0" longname="" type="WALL" visible="True" />
+                <Entity id="17" name="WALL_0_1389356358_FW0_LOWER_0" longname="" type="WALL" visible="True" />
+                <Entity id="8" name="WALL_0_1389356358_FW0_SIDE0_0" longname="" type="WALL" visible="True" />
+                <Entity id="10" name="WALL_0_1389356358_FW0_SIDE1_0" longname="" type="WALL" visible="True" />
+                <Entity id="1" name="WALL_0_1389356358_FW0_SIDE2_0" longname="" type="WALL" visible="True" />
+                <Entity id="15" name="WALL_0_1389356358_FW0_SIDE3_0" longname="" type="WALL" visible="True" />
+                <Entity id="16" name="WALL_0_1389356358_FW0_UPPER_0" longname="" type="WALL" visible="True" />
+                <Entity id="56" name="WALL_0_139979841_FW0_LOWER_0" longname="" type="WALL" visible="True" />
+                <Entity id="43" name="WALL_0_139979841_FW0_SIDE0_0" longname="" type="WALL" visible="True" />
+                <Entity id="41" name="WALL_0_139979841_FW0_SIDE1_0" longname="" type="WALL" visible="True" />
+                <Entity id="39" name="WALL_0_139979841_FW0_SIDE2_0" longname="" type="WALL" visible="True" />
+                <Entity id="37" name="WALL_0_139979841_FW0_SIDE3_0" longname="" type="WALL" visible="True" />
+                <Entity id="54" name="WALL_0_139979841_FW0_UPPER_0" longname="" type="WALL" visible="True" />
+                <Entity id="3" name="WALL_0_1459184890_FW0_LOWER_0" longname="" type="WALL" visible="True" />
+                <Entity id="6" name="WALL_0_1459184890_FW0_SIDE0_0" longname="" type="WALL" visible="True" />
+                <Entity id="7" name="WALL_0_1459184890_FW0_SIDE1_0" longname="" type="WALL" visible="True" />
+                <Entity id="9" name="WALL_0_1459184890_FW0_SIDE2_0" longname="" type="WALL" visible="True" />
+                <Entity id="12" name="WALL_0_1459184890_FW0_SIDE3_0" longname="" type="WALL" visible="True" />
+                <Entity id="14" name="WALL_0_1459184890_FW0_UPPER_0" longname="" type="WALL" visible="True" />
+                <Entity id="31" name="WALL_0_1540237437_FW0_LOWER_0" longname="" type="WALL" visible="True" />
+                <Entity id="27" name="WALL_0_1540237437_FW0_SIDE0_0" longname="" type="WALL" visible="True" />
+                <Entity id="28" name="WALL_0_1540237437_FW0_SIDE1_0" longname="" type="WALL" visible="True" />
+                <Entity id="13" name="WALL_0_1540237437_FW0_SIDE2_0" longname="" type="WALL" visible="True" />
+                <Entity id="29" name="WALL_0_1540237437_FW0_SIDE3_0" longname="" type="WALL" visible="True" />
+                <Entity id="30" name="WALL_0_1540237437_FW0_UPPER_0" longname="" type="WALL" visible="True" />
+                <Entity id="11" name="WALL_0_2141616243_FW0_LOWER_0" longname="" type="WALL" visible="True" />
+                <Entity id="50" name="WALL_0_2141616243_FW0_SIDE0_0" longname="" type="WALL" visible="True" />
+                <Entity id="51" name="WALL_0_2141616243_FW0_SIDE1_0" longname="" type="WALL" visible="True" />
+                <Entity id="52" name="WALL_0_2141616243_FW0_SIDE2_0" longname="" type="WALL" visible="True" />
+                <Entity id="53" name="WALL_0_2141616243_FW0_SIDE3_0" longname="" type="WALL" visible="True" />
+                <Entity id="5" name="WALL_0_2141616243_FW0_UPPER_0" longname="" type="WALL" visible="True" />
+                <Entity id="36" name="WALL_0_252462787_FW0_LOWER_0" longname="" type="WALL" visible="True" />
+                <Entity id="2" name="WALL_0_252462787_FW0_SIDE0_0" longname="" type="WALL" visible="True" />
+                <Entity id="32" name="WALL_0_252462787_FW0_SIDE1_0" longname="" type="WALL" visible="True" />
+                <Entity id="33" name="WALL_0_252462787_FW0_SIDE2_0" longname="" type="WALL" visible="True" />
+                <Entity id="35" name="WALL_0_252462787_FW0_SIDE3_0" longname="" type="WALL" visible="True" />
+                <Entity id="20" name="WALL_0_252462787_FW0_UPPER_0" longname="" type="WALL" visible="True" />
+                <Entity id="23" name="WALL_0_31467507_FW0_LOWER_0" longname="" type="WALL" visible="True" />
+                <Entity id="46" name="WALL_0_31467507_FW0_SIDE0_0" longname="" type="WALL" visible="True" />
+                <Entity id="47" name="WALL_0_31467507_FW0_SIDE1_0" longname="" type="WALL" visible="True" />
+                <Entity id="48" name="WALL_0_31467507_FW0_SIDE2_0" longname="" type="WALL" visible="True" />
+                <Entity id="49" name="WALL_0_31467507_FW0_SIDE3_0" longname="" type="WALL" visible="True" />
+                <Entity id="34" name="WALL_0_31467507_FW0_UPPER_0" longname="" type="WALL" visible="True" />
+                <Entity id="62" name="WALL_0_879592408_FW0_LOWER_0" longname="" type="WALL" visible="True" />
+                <Entity id="57" name="WALL_0_879592408_FW0_SIDE0_0" longname="" type="WALL" visible="True" />
+                <Entity id="58" name="WALL_0_879592408_FW0_SIDE1_0" longname="" type="WALL" visible="True" />
+                <Entity id="59" name="WALL_0_879592408_FW0_SIDE2_0" longname="" type="WALL" visible="True" />
+                <Entity id="55" name="WALL_0_879592408_FW0_SIDE3_0" longname="" type="WALL" visible="True" />
+                <Entity id="60" name="WALL_0_879592408_FW0_UPPER_0" longname="" type="WALL" visible="True" />
+                <Entity id="67" name="WALL_0_966172973_FW0_LOWER_0" longname="" type="WALL" visible="True" />
+                <Entity id="61" name="WALL_0_966172973_FW0_SIDE0_0" longname="" type="WALL" visible="True" />
+                <Entity id="63" name="WALL_0_966172973_FW0_SIDE1_0" longname="" type="WALL" visible="True" />
+                <Entity id="64" name="WALL_0_966172973_FW0_SIDE2_0" longname="" type="WALL" visible="True" />
+                <Entity id="65" name="WALL_0_966172973_FW0_SIDE3_0" longname="" type="WALL" visible="True" />
+                <Entity id="66" name="WALL_0_966172973_FW0_UPPER_0" longname="" type="WALL" visible="True" />
+                <Entity id="26" name="WALL_0_968606199_FW0_LOWER_0" longname="" type="WALL" visible="True" />
+                <Entity id="18" name="WALL_0_968606199_FW0_SIDE0_0" longname="" type="WALL" visible="True" />
+                <Entity id="21" name="WALL_0_968606199_FW0_SIDE1_0" longname="" type="WALL" visible="True" />
+                <Entity id="22" name="WALL_0_968606199_FW0_SIDE2_0" longname="" type="WALL" visible="True" />
+                <Entity id="24" name="WALL_0_968606199_FW0_SIDE3_0" longname="" type="WALL" visible="True" />
+                <Entity id="25" name="WALL_0_968606199_FW0_UPPER_0" longname="" type="WALL" visible="True" />
+            </Entity>
+        </ObjectHierarchy>
+    </Building>
+</Project>
+FW0_SIDE2_0" longname="" type="WALL" visible="True" />
+                <Entity id="65" name="WALL_0_966172973_FW0_SIDE3_0" longname="" type="WALL" visible="True" />
+                <Entity id="66" name="WALL_0_966172973_FW0_UPPER_0" longname="

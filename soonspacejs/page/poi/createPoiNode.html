@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SoonSpace Example</title>
+  <link rel="stylesheet" href="../../asstes/css/base.css">
+</head>
+
+<body>
+  <div id="view"></div>
+  <script src="../../sdk/index.js"></script>
+  <script>
+    const ssp = new SoonSpace({
+      el: '#view',
+      option: {
+        backgroundColor: 0x333300,
+        showGrid: true
+      },
+      events: {}
+    })
+
+    // 创建一个元素
+    let el = document.createElement('div')
+    // 元素背景
+    el.style.background = "url('../../asstes/img/poi/3dpoi.png') center / contain no-repeat"
+    // 元素宽度
+    el.style.width = "50px"
+    // 元素高度
+    el.style.height = "28px"
+    // 元素字体大小
+    el.style.fontSize = "2em"
+    // 元素字体颜色
+    el.style.color = "white"
+
+    // 点击事件
+    el.onclick = function () {
+      alert('poiNode 2D img click')
+    }
+
+    // 创建一个元素
+    let el1 = document.createElement('div')
+    // 元素背景
+    el1.style.background = "url('../../asstes/img/poi/3dpoi.png') center / contain no-repeat"
+    // 元素宽度
+    el1.style.width = "50px"
+    // 元素高度
+    el1.style.height = "28px"
+    // 元素字体大小
+    el1.style.fontSize = "2em"
+    // 元素字体颜色
+    el1.style.color = "white"
+
+    // 点击事件
+    el1.onclick = function () {
+      alert('poiNode 3D img click')
+    }
+
+    /**
+     * 
+     * @param  {}
+     * @return {}
+     */
+    // const group = ssp.createPoiNodeToGroup(
+    //   {
+    //     id: 'firstNodePoiGroup',
+    //     name: ''
+    //   },
+    //   [
+    //     {
+    //       type: '2D',
+    //       id: 'PoiNode1',
+    //       position: {
+    //         x: 0,
+    //         y: 40,
+    //         z: 0
+    //       },
+    //       element: el
+    //     }
+    //   ]
+    // )
+
+    const poiNodeInfo = []
+
+    for (let i = 0; i < 10; i++) {
+
+      poiNodeInfo.push(
+        {
+          type: '3D',
+          id: `PoiNode${i + 1}`,
+          position: {
+            x: 0,
+            y: 100 * (i + 1),
+            z: 0
+          },
+          element: el1.cloneNode(true)
+        }
+      )
+    }
+
+    const group = ssp.createPoiNodeToGroup(
+      {
+        id: 'nodePoiGroup'
+      },
+      poiNodeInfo
+    )
+
+    console.log(group, ssp.getPoiNodeById('PoiNode10'))
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SoonSpace Example</title>
+  <link rel="stylesheet" href="../../asstes/css/base.css">
+  <link rel="stylesheet" href="../../asstes/css/tool.css">
+</head>
+
+<body>
+
+  <div id="view">
+    <div class="right-top-toolBax">
+      <button id="move">移动模型</button>
+      <button id="cancel">取消操作</button>
+    </div>
+  </div>
+
+  <script src="../../sdk/index.js"></script>
+  <script>
+
+    let model = null
+    let followMouse = null
+
+    document.getElementById("move").onclick = function () {
+
+      if (model) {
+
+        followMouse = ssp.followMouse(model);
+
+        function followMouseEnd(event) {
+
+          console.log(event)
+
+        }
+
+        // 监听移动结束
+        followMouse.addEventListener("end", followMouseEnd, false)
+
+      } else alert("请点击选中模型！")
+
+    }
+
+
+    document.getElementById("cancel").onclick = function () {
+
+      if (model) {
+
+        if (followMouse) {
+
+          followMouse.detach()
+
+          followMouse = null
+
+        }
+
+        else alert("请先开始跟随鼠标！")
+
+      } else alert("请点击选中模型！")
+
+    }
+
+    const ssp = new SoonSpace({
+      el: '#view',
+      option: {
+      },
+      events: {
+        modelClick(param) {
+          model = param.target
+
+          ssp.unOpacityShow().then(() => {
+
+            ssp.opacityShow(model)
+
+          })
+        }
+      }
+    })
+
+    // 样例模型服务地址
+    const baseUrl = '../../asstes/model/sbm/yingtaidasha'
+
+    const mapsUrl = `${baseUrl}/Maps/`
+
+    const sbmsInfo = [
+      {
+        id: '1F',
+        name: '1F',
+        url: `${baseUrl}/yingtaidasha_B1_0.sbm`,
+        mapsUrl
+      },
+      {
+        id: '1F',
+        name: '1F',
+        url: `${baseUrl}/yingtaidasha_1F_1.sbm`,
+        mapsUrl
+      },
+      {
+        id: '2F',
+        name: '2F',
+        url: `${baseUrl}/yingtaidasha_2F_2.sbm`,
+        mapsUrl
+      },
+      {
+        id: '3F',
+        name: '3F',
+        url: `${baseUrl}/yingtaidasha_3F_3.sbm`,
+        mapsUrl
+      },
+      {
+        id: '4F',
+        name: '4F',
+        url: `${baseUrl}/yingtaidasha_4F_4.sbm`,
+        mapsUrl
+      },
+      {
+        id: '5F',
+        name: '5F',
+        url: `${baseUrl}/yingtaidasha_5F_5.sbm`,
+        mapsUrl
+      },
+      {
+        id: '6F',
+        name: '6F',
+        url: `${baseUrl}/yingtaidasha_6F_6.sbm`,
+        mapsUrl
+      },
+      {
+        id: '7F',
+        name: '7F',
+        url: `${baseUrl}/yingtaidasha_7F_7.sbm`,
+        mapsUrl
+      }
+      // ...
+    ]
+
+    ssp.loadSbm(sbmsInfo)
+
+  </script>
+</body>
+
+</html>

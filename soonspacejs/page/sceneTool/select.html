@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SoonSpace Example</title>
+  <link rel="stylesheet" href="../../asstes/css/base.css">
+  <link rel="stylesheet" href="../../asstes/css/tool.css">
+</head>
+
+<body>
+  <div id="view">
+    <div class="right-top-toolBax">
+      <div class="line">
+        <span class="line-key">选中模式:</span>
+        <select name="mode" id="mode">
+          <option value="opacity">透明</option>
+          <option value="edge">轮廓</option>
+          <option value="emissive">自发光</option>
+        </select>
+      </div>
+      <div class="line">
+        <button id="clearOpacity">清除透明选择</button>
+      </div>
+      <div class="line">
+        <button id="clearEdge">清除轮廓选择</button>
+      </div>
+      <div class="line">
+        <button id="clearEmissive">清除自发光选择</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../sdk/index.js"></script>
+  <script>
+
+    let mode = 'opacity'
+
+    document.getElementById("mode").onchange = function (e) {
+
+      mode = e.target.value
+
+    }
+
+    document.getElementById("clearOpacity").onclick = function (e) {
+
+      ssp.unOpacityShow()
+
+    }
+
+    document.getElementById("clearEdge").onclick = function (e) {
+
+      ssp.unEdgeShow()
+
+    }
+
+    document.getElementById("clearEmissive").onclick = function (e) {
+
+      ssp.unEmissiveShow()
+
+    }
+
+    const ssp = new SoonSpace({
+      el: '#view',
+      option: {
+        showInfo: true
+      },
+      events: {
+
+        modelClick(param) {
+
+          const model = param.target
+
+          if (mode === 'opacity') {
+
+            // ssp.unOpacityShow()
+            //   .then(() => {
+                ssp.opacityShow(model, { opacity: 0.4, color: 0xffffff })
+              // })
+
+          } else if (mode === 'edge') {
+
+            ssp.unEdgeShow()
+              .then(() => {
+                ssp.edgeShow(model, { color: 0xff0000 })
+              })
+
+          } else if (mode === 'emissive') {
+
+            ssp.unEmissiveShow()
+              .then(() => {
+                ssp.emissiveShow(model, {
+                  isAnimation: true,
+                  color: 0xff0000,
+                  repeat: true,
+                  duration: 1000,
+                  maxOpacity: 1,
+                  minOpacity: 0
+                })
+              })
+
+          }
+
+        }
+
+      }
+
+    })
+
+    const baseUrl = '../../asstes/model/sbm/yingtaidasha'
+    const mapsUrl = `${baseUrl}/Maps/`
+    const sbmsInfo = [
+      {
+        id: 'B1',
+        name: 'B1',
+        url: `${baseUrl}/yingtaidasha_B1_0.sbm`,
+        mapsUrl
+      },
+      {
+        id: '1F',
+        name: '1F',
+        url: `${baseUrl}/yingtaidasha_1F_1.sbm`,
+        mapsUrl
+      },
+      {
+        id: '2F',
+        name: '2F',
+        url: `${baseUrl}/yingtaidasha_2F_2.sbm`,
+        mapsUrl
+      },
+      {
+        id: '3F',
+        name: '3F',
+        url: `${baseUrl}/yingtaidasha_3F_3.sbm`,
+        mapsUrl
+      },
+      {
+        id: '4F',
+        name: '4F',
+        url: `${baseUrl}/yingtaidasha_4F_4.sbm`,
+        mapsUrl
+      },
+      {
+        id: '5F',
+        name: '5F',
+        url: `${baseUrl}/yingtaidasha_5F_5.sbm`,
+        mapsUrl
+      },
+      {
+        id: '6F',
+        name: '6F',
+        url: `${baseUrl}/yingtaidasha_6F_6.sbm`,
+        mapsUrl
+      },
+      {
+        id: '7F',
+        name: '7F',
+        url: `${baseUrl}/yingtaidasha_7F_7.sbm`,
+        mapsUrl
+      },
+      {
+        id: '7_1F',
+        name: '7F',
+        url: `${baseUrl}/yingtaidasha_7F_7.sbm`,
+        mapsUrl
+      }
+      // ...
+    ]
+
+    ssp.loadSbm(sbmsInfo)
+
+  </script>
+</body>
+
+</html>

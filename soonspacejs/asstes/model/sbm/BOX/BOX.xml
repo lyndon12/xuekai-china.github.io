@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Project>
+    <ProjectInfo gkxmlVersion="1.2">
+        <Title>BOX</Title>
+    </ProjectInfo>
+    <Building sourceType="GPL" northAxis="0.000000">
+        <EarthReferenceSystem type="WGS84">
+            <altitudeMode>relativeToGround</altitudeMode>
+            <Location>
+                <longitude>30</longitude>
+                <latitude>119</latitude>
+                <altitude>0</altitude>
+            </Location>
+            <Orientation>
+                <heading>0</heading>
+                <tilt>0.0</tilt>
+                <roll>0.0</roll>
+            </Orientation>
+        </EarthReferenceSystem>
+        <ExportOptions>
+            <Item name="floorMerge" value="false" />
+            <Item name="wallMerge" value="false" />
+        </ExportOptions>
+        <Unit>centimeter</Unit>
+        <DefaultBuilding>false</DefaultBuilding>
+        <DefaultFloor>0</DefaultFloor>
+        <Floors>
+            <Floor id="0" name="1F" baseFloor="1" groupID="0" isMain="True">
+                <FileSource name=".\BOX_1F_0.sbm" type="SBM" />
+                <BoundingBox minimum="-252.000000, 0.000000, -157.500000" maximum="68.000000, 300.000000, 162.500000" />
+            </Floor>
+        </Floors>
+        <SpaceInfo>
+            <Floor id="0" name="1F" longname="1000916431" baseFloor="1" level="0.000000">
+                <Space name="1783250181" longname="Space_1" type="SPACE" posX="-92.000000" posY="0.000000" posZ="2.500000" area="78400.00" visible="True" />
+            </Floor>
+        </SpaceInfo>
+        <ObjectHierarchy>
+            <Entity id="0" name="1F" type="Floor" longname="1000916431">
+                <Entity id="26" name="1783250181" longname="Space_1" type="SPACE" posX="-92.000000" posY="0.000000" posZ="2.500000" area="78400.00" visible="True" />
+                <Entity id="25" name="CEILING_0_1491930048_0" longname="" type="CEILING" visible="True" />
+                <Entity id="24" name="WALL_0_1054545567_FW0_LOWER_0" longname="" type="WALL" visible="True" />
+                <Entity id="20" name="WALL_0_1054545567_FW0_SIDE0_0" longname="" type="WALL" visible="True" />
+                <Entity id="21" name="WALL_0_1054545567_FW0_SIDE1_0" longname="" type="WALL" visible="True" />
+                <Entity id="12" name="WALL_0_1054545567_FW0_SIDE2_0" longname="" type="WALL" visible="True" />
+                <Entity id="22" name="WALL_0_1054545567_FW0_SIDE3_0" longname="" type="WALL" visible="True" />
+                <Entity id="23" name="WALL_0_1054545567_FW0_UPPER_0" longname="" type="WALL" visible="True" />
+                <Entity id="19" name="WALL_0_1220775879_FW0_LOWER_0" longname="" type="WALL" visible="True" />
+                <Entity id="14" name="WALL_0_1220775879_FW0_SIDE0_0" longname="" type="WALL" visible="True" />
+                <Entity id="15" name="WALL_0_1220775879_FW0_SIDE1_0" longname="" type="WALL" visible="True" />
+                <Entity id="16" name="WALL_0_1220775879_FW0_SIDE2_0" longname="" type="WALL" visible="True" />
+                <Entity id="17" name="WALL_0_1220775879_FW0_SIDE3_0" longname="" type="WALL" visible="True" />
+                <Entity id="18" name="WALL_0_1220775879_FW0_UPPER_0" longname="" type="WALL" visible="True" />
+                <Entity id="13" name="WALL_0_197473155_FW0_LOWER_0" longname="" type="WALL" visible="True" />
+                <Entity id="9" name="WALL_0_197473155_FW0_SIDE0_0" longname="" type="WALL" visible="True" />
+                <Entity id="10" name="WALL_0_197473155_FW0_SIDE1_0" longname="" type="WALL" visible="True" />
+                <Entity id="7" name="WALL_0_197473155_FW0_SIDE2_0" longname="" type="WALL" visible="True" />
+                <Entity id="11" name="WALL_0_197473155_FW0_SIDE3_0" longname="" type="WALL" visible="True" />
+                <Entity id="2" name="WALL_0_197473155_FW0_UPPER_0" longname="" type="WALL" visible="True" />
+                <Entity id="8" name="WALL_0_439900957_FW0_LOWER_0" longname="" type="WALL" visible="True" />
+                <Entity id="1" name="WALL_0_439900957_FW0_SIDE0_0" longname="" type="WALL" visible="True" />
+                <Entity id="3" name="WALL_0_439900957_FW0_SIDE1_0" longname="" type="WALL" visible="True" />
+                <Entity id="4" name="WALL_0_439900957_FW0_SIDE2_0" longname="" type="WALL" visible="True" />
+                <Entity id="6" name="WALL_0_439900957_FW0_SIDE3_0" longname="" type="WALL" visible="True" />
+                <Entity id="5" name="WALL_0_439900957_FW0_UPPER_0" longname="" type="WALL" visible="True" />
+            </Entity>
+        </ObjectHierarchy>
+    </Building>
+</Project>
