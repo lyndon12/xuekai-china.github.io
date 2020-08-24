@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SoonSpace Example</title>
+  <link rel="stylesheet" href="../../asstes/css/base.css">
+  <link rel="stylesheet" href="../../lib/antd-vue/antd.min.css">
+</head>
+
+<body>
+  <div id="view"></div>
+  <div id="app"></div>
+
+  <script src="../../lib/vue/vue.min.js"></script>
+  <script src="../../lib/antd-vue/antd.min.js"></script>
+  <script src="../../sdk/index.js"></script>
+  <script src="../../../package/soon-gui/index.js"></script>
+  <script>
+
+    const vm = new Vue({
+      el: '#app',
+      template:
+        `
+  <div id="app" v-if="loading">
+    <div class="progress-container">
+      <div class="progress-warp ">
+        <div style="width: 600px; display: inline-block;">
+          <span style="color: #fff">已加载模型数量：{{ progress.loadingModelIndex }} / {{ progress.modelTotal }}</span>
+          <br/>
+          <span style="color: #fff">单次加载用时：{{ progress.current.timeStamp }} ms</span>
+          <a-progress :percent="percent" />
+        </div>
+      </div>
+    </div>
+  </div>
+  `,
+      data: {
+        loading: true,
+        progress: {
+          current: {
+            loaded: 0,
+            total: 0,
+            timeStamp: 0
+          },
+          loadingModelIndex: 0,
+          modelTotal: 0
+        },
+        percent: 0
+      },
+      watch: {
+        progress: function (val) {
+          const { progress } = this
+          this.percent = (100 / progress.modelTotal) * (progress.loadingModelIndex - 1) + ((100 / progress.modelTotal) * (progress.current.loaded / progress.current.total))
+        }
+      }
+    })
+
+    const ssp = new SoonSpace({
+      el: '#view',
+      option: {
+        showInfo: true,
+        showGrid: true
+      },
+      events: {}
+    })
+
+    const baseUrl = '../../asstes/model/sbm/yingtaidasha'
+    const mapsUrl = `${baseUrl}/Maps/`
+    const sbmsInfo = [
+      {
+        id: 'B1_0',
+        name: 'B1',
+        url: `${baseUrl}/yingtaidasha_B1_0.sbm`,
+        mapsUrl,
+        position: { x: 0, y: 0, z: 0 },
+        userData: {
+          modelCode: 'njnkjnkjnjdnkjnkjnm'
+        }
+      },
+      {
+        id: '1F',
+        name: '1F',
+        url: `${baseUrl}/yingtaidasha_1F_1.sbm`,
+        mapsUrl,
+        userData: {
+          aaaaaaa: 'a'
+        }
+      },
+      {
+        id: '2F',
+        name: '2F',
+        url: `${baseUrl}/yingtaidasha_2F_2.sbm`,
+        mapsUrl
+      },
+      {
+        id: '3F',
+        name: '3F',
+        url: `${baseUrl}/yingtaidasha_3F_3.sbm`,
+        mapsUrl,
+        userData: {
+          data: {
+            age: 17
+          }
+        }
+      },
+      {
+        id: '4F',
+        name: '4F',
+        url: `${baseUrl}/yingtaidasha_4F_4.sbm`,
+        mapsUrl,
+        userData: {
+          data: {
+            age: 18
+          }
+        }
+      },
+      {
+        id: '5F',
+        name: '5F',
+        url: `${baseUrl}/yingtaidasha_5F_5.sbm`,
+        mapsUrl,
+        userData: {
+          data: {
+            sex: '男'
+          }
+        }
+      },
+      {
+        id: '6F',
+        name: '6F',
+        url: `${baseUrl}/yingtaidasha_6F_6.sbm`,
+        mapsUrl
+      },
+      {
+        id: '7F',
+        name: '7F',
+        url: `${baseUrl}/yingtaidasha_7F_7.sbm`,
+        mapsUrl
+      }
+      // ...
+    ]
+
+    /**
+     * 加载 sbm˝
+     */
+    ssp.loadSbm(
+      sbmsInfo,
+      progress => vm.progress = JSON.parse(JSON.stringify(progress))
+    )
+      .then(models => {
+        console.log('loaded models:', models)
+        vm.loading = false
+      })
+
+    // /**
+    //  * 加载 sbm 到组内
+    //  */
+    // ssp.loadSbmToGroup(
+    //   // groupParam
+    //   {
+    //     id: 'firstSbmGroup',
+    //     name: 'name_firstSbmGroup',
+    //     scale: {
+    //       x: 10,
+    //       y: 10,
+    //       z: 10
+    //     }
+    //   },
+    //   // sbmParam
+    //   sbmsInfo,
+    //   progress => vm.progress = JSON.parse(JSON.stringify(progress))
+    // )
+    //   .then(group => {
+
+    //     return ssp.addSbmForGroup(
+    //       'firstSbmGroup',
+    //       [
+    //         {
+    //           id: 'B1_0',
+    //           name: 'B1',
+    //           url: `${baseUrl}/yingtaidasha_22F_22.sbm`,
+    //           mapsUrl,
+    //           position: { x: 5000, y: 0, z: 5000 },
+    //           userData: {
+    //             modelCode: 'njnkjnkjnjdnkjnkjnm'
+    //           }
+    //         }
+    //       ],
+    //       progress => vm.progress = JSON.parse(JSON.stringify(progress))
+    //     )
+    //   })
+    //   .then(group => {
+    //     console.log('addSbmForGroup', group)
+    //     console.log('getSbmByUserDataProperty', ssp.getSbmByUserDataProperty('data', item => item.age === 18))
+    //     console.log('getSbmByUserDataProperty', ssp.getSbmByUserDataProperty('data', item => item.age > 12))
+
+    //     vm.loading = false
+
+    //     ssp.flyToObj(group)
+    //   })
+    //   .catch(err => console.error(err))
+
+    const gui = new GUI({
+      el: '#view'
+    })
+
+    const options = [{
+      label: '全部',
+      value: 'all'
+    }]
+
+    for (let i in sbmsInfo) {
+      options.push({
+        label: sbmsInfo[i].name,
+        value: sbmsInfo[i].id
+      })
+    }
+
+    gui.addSelect({
+      label: '显示楼层',
+      options,
+      onChange(e) {
+        if (e.target.value === 'all') {
+
+          ssp.showAllSbm()
+          ssp.flyMainViewpoint()
+
+        } else {
+
+          ssp.hideAllSbm()
+         
+          const floor =  ssp.getSbmById(e.target.value)
+
+          if( floor ) {
+            floor.show()
+            ssp.flyToObj(floor)
+          }
+
+        }
+      }
+    })
+
+  </script>
+</body>
+
+</html>

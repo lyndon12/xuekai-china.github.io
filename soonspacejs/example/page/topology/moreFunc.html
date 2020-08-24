@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SoonSpace Example</title>
+  <link rel="stylesheet" href="../../asstes/css/base.css">
+</head>
+
+<body>
+  <div id="view"></div>
+
+  <script src="../../sdk/index.js"></script>
+  <script src="../../../package/soon-gui/index.js"></script>
+
+  <script>
+
+    let pathGroup = null
+    let shortestPath = null
+    let patrol = null
+    let isPause = false
+
+    const ssp = new SoonSpace({
+      el: '#view',
+      option: {
+        showInfo: true
+      },
+      events: {}
+    })
+
+    ssp.loadXml({ id: 'xml' }, '../../asstes/model/sbm/hzl/hzl.xml')
+      .then(group => {
+
+        ssp.flyMainViewpoint()
+
+      })
+
+    const gui = new GUI({
+      el: '#view'
+    })
+
+    gui.addButton({
+      text: '加载路径',
+      onClick() {
+        ssp.loadGml({ id: 'gml' }, '../../asstes/model/sbm/hzl/hzl.gml')
+          .then(group => {
+            pathGroup = group
+            shortestPathBtn.parentNode.show()
+          })
+      }
+    })
+
+    const shortestPathBtn = gui.addButton({
+      text: '获取最短路径',
+      style: {
+        display: 'none'
+      },
+      onClick() {
+        shortestPath = ssp.getShortestPath({
+          topology: pathGroup.children[0],
+          positions: {
+            start: {
+              x: 2573,
+              y: 2,
+              z: -582
+            },
+            end: {
+              x: 4522,
+              y: 2,
+              z: 5257
+            }
+          },
+          restrict: null,
+          color: 0xff0000
+        })
+
+        if (shortestPath) autoPatrolBtn.parentNode.show()
+        else alert('未能计算出俩点直接的最短路径！')
+
+      }
+    })
+
+    const autoPatrolBtn = gui.addButton({
+      text: '开始导航',
+      style: {
+        display: 'none'
+      },
+      onClick() {
+        patrol = ssp.autoPatrol({
+          mode: 'firstPerson',
+          lookAtY: 0,
+          path: shortestPath,
+          naviSpeed: 3,
+          eyeHeight: 100,
+          onEnd: () => console.log('onEnd')
+        })
+
+        pauseBtn.parentNode.show()
+        stopBtn.parentNode.show()
+        thirdPersonBtn.parentNode.show()
+      }
+    })
+
+    const pauseBtn = gui.addButton({
+      text: '暂停',
+      style: {
+        display: 'none'
+      },
+      onClick() {
+
+        isPause = !isPause
+
+        if (isPause) {
+
+          patrol.pause()
+          ssp.
+          pauseBtn.innerHTML = '开始'
+
+        } else {
+
+          patrol.following()
+          pauseBtn.innerHTML = '暂停'
+
+        }
+
+      }
+    })
+
+    const stopBtn = gui.addButton({
+      text: '停止',
+      style: {
+        display: 'none'
+      },
+      onClick() {
+        ssp.stopAutoPatrol()
+
+        pauseBtn.parentNode.hide()
+        stopBtn.parentNode.hide()
+        thirdPersonBtn.parentNode.hide()
+
+      }
+    })
+
+    const thirdPersonBtn = gui.addButton({
+      text: '第三人称',
+      style: {
+        display: 'none'
+      },
+      onClick() {
+
+        if (thirdPersonBtn.innerText === '第三人称') {
+
+          patrol.modeChange('thirdPerson')
+          thirdPersonBtn.innerText = '第一人称'
+
+        } else if (thirdPersonBtn.innerText === '第一人称') {
+
+          patrol.modeChange('firstPerson')
+          thirdPersonBtn.innerText = '第三人称'
+
+        }
+
+      }
+    })
+
+  </script>
+</body>
+
+</html>

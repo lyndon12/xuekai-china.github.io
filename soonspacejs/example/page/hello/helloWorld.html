@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SoonSpace Example</title>
+  <link rel="stylesheet" href="../../asstes/css/base.css">
+</head>
+
+<body>
+  <div id="view">
+    <div class=""></div>
+  </div>
+  <script src="../../sdk/index.js"></script>
+  <script>
+     window.ssp = new SoonSpace({
+      // 绑定场景的元素选择器
+      el: '#view',
+      // 初始配置项
+      option: {
+        // 背景色 十六进制
+        backgroundColor: 0x333300,
+        // 是否显示网格
+        showGrid: true,
+        // 是否显示左下角的加载数量信息
+        showInfo: true
+      },
+      // 场景交互事件
+      events: {
+
+      }
+    })
+
+  </script>
+</body>
+
+</html>

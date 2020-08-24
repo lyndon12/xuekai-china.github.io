@@ -1,0 +1,19 @@
+{
+  "name": "soon-gui",
+  "version": "0.0.5",
+  "description": "soon-gui for soonspacejs example",
+  "main": "index.js",
+  "module": "index.es.js",
+  "unpkg": "index.js",
+  "keywords": [
+    "soonspace",
+    "soonspacejs",
+    "gui"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xuekai-china/soon-gui.git"
+  },
+  "author": "xuek",
+  "license": "ISC"
+}

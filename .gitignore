@@ -1,9 +1,10 @@
 # Test
-soonspacejs/page/test
-soonspacejs/asstes/testModel
+soonspacejs/example/page/test
+soonspacejs/example/asstes/testModel
+soonspacejs/example/online-edit
 
 # Big file
-soonspacejs/asstes/model/json/1_line.json
+soonspacejs/example/asstes/model/json/1_line.json
 
 # Private file
-soonspacejs/sdk/index.sbm.js
+soonspacejs/example/sdk/index.sbm.js

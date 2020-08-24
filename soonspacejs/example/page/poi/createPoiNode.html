@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SoonSpace Example</title>
+  <link rel="stylesheet" href="../../asstes/css/base.css">
+</head>
+
+<body>
+  <div id="view"></div>
+
+  <div id="poiTemplate"
+    style="display: none; width: 160px; height: auto; padding: 8px; background-color: rgba(0, 0, 0, 0.6); color: #ccc;">
+    <h3 style="text-align: center;">标题</h3>
+    <div>
+      <label>数据一：</label>
+      <span>10</span>
+    </div>
+    <div>
+      <label>数据二：</label>
+      <span>20</span>
+    </div>
+    <div>
+      <label>数据三：</label>
+      <span>30</span>
+    </div>
+  </div>
+
+  <script src="../../sdk/index.js"></script>
+  <script src="../../../package/soon-gui/index.js"></script>
+
+  <script>
+    const ssp = new SoonSpace({
+      el: '#view',
+      option: {
+        backgroundColor: 0x333300,
+        showGrid: true
+      },
+      events: {}
+    })
+
+    ssp.flyMainViewpoint()
+
+    const el = document.getElementById('poiTemplate')
+
+    const gui = new GUI({
+      el: '#view'
+    })
+
+    gui.addButton({
+      text: '创建 2D PoiNode',
+      onClick() {
+        const poi2DEl = el.cloneNode(true)
+        poi2DEl.onclick = function () {
+          alert('2D PoiNode click')
+        }
+        ssp.createPoiNode({
+          type: '2D',
+          id: '2DPoiNode',
+          position: {
+            x: 200,
+            y: 40,
+            z: 200
+          },
+          element: poi2DEl
+        })
+      }
+    })
+
+    gui.addButton({
+      text: '创建 2.5D PoiNode',
+      onClick() {
+        const poi2_5DEl = el.cloneNode(true)
+        poi2_5DEl.onclick = function () {
+          alert('2.5D PoiNode click')
+        }
+        ssp.createPoiNode({
+          type: '2.5D',
+          id: '2.5DPoiNode',
+          position: {
+            x: 0,
+            y: 40,
+            z: 0
+          },
+          element: poi2_5DEl
+        })
+      }
+    })
+
+    gui.addButton({
+      text: '创建 3D PoiNode',
+      onClick() {
+        const poi3DEl = el.cloneNode(true)
+        poi3DEl.onclick = function () {
+          alert('3D PoiNode click')
+        }
+        ssp.createPoiNode({
+          type: '3D',
+          id: '3DPoiNode',
+          position: {
+            x: -200,
+            y: 40,
+            z: -200
+          },
+          element: poi3DEl
+        })
+      }
+    })
+
+    gui.addButton({
+      text: '清空 PoiNode',
+      onClick() {
+        ssp.clearPoiNode()
+      }
+    })
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SoonSpace Example</title>
+  <link rel="stylesheet" href="../../asstes/css/base.css">
+</head>
+
+<body>
+  <div id="view"></div>
+
+  <script src="../../sdk/index.js"></script>
+  <script src="../../../package/soon-gui/index.js"></script>
+  <script>
+
+    let model = null
+
+    const ssp = new SoonSpace({
+      el: '#view',
+      option: {
+        backgroundColor: 0x333300,
+        showInfo: true
+      },
+      events: {}
+    })
+
+    const baseUrl = '../../asstes/model/sbm/yingtaidasha'
+    const mapsUrl = `${baseUrl}/Maps/`
+    const sbmsInfo = {
+      id: 'B1_0',
+      name: 'B1',
+      url: `${baseUrl}/yingtaidasha_B1_0.sbm`,
+      mapsUrl,
+      userData: {
+        modelCode: 'njnkjnkjnjdnkjnkjnm'
+      }
+    }
+
+    ssp.loadSbm(sbmsInfo)
+      .then(res => {
+
+        ssp.flyToObj(res)
+
+        model = res
+
+      })
+
+    const gui = new GUI({
+      el: '#view'
+    })
+
+    const range = gui.addRange({
+      label: '模型分裂',
+      max: 2000,
+      min: 0,
+      onInput(e) {
+        ssp.blastModel(model, e.target.value)
+      }
+    })
+
+    gui.addButton({
+      text: '关闭',
+      onClick() {
+        ssp.closeBlastModel()
+        range.value = 0
+      }
+    })
+
+  </script>
+</body>
+
+</html>

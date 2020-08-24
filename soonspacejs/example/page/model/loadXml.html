@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SoonSpace Example</title>
+  <link rel="stylesheet" href="../../asstes/css/base.css">
+</head>
+
+<body>
+  <div id="view"></div>
+  <script src="../../sdk/index.js"></script>
+  <script>
+
+    const ssp = new SoonSpace({
+      el: '#view',
+      option: {
+        showInfo: true,
+        backgroundColor: 0x30030
+      },
+      events: {}
+    })
+
+    const xmlUrl = '../../asstes/model/sbm/yingtaidasha/yingtaidasha.xml'
+
+    ssp.loadXml(
+      {
+        id: 'firstSbmGroup',
+        name: 'name_firstSbmGroup',
+        // level: {
+        //   max: 70000,
+        //   min: 500
+        // },
+        position: {
+          x: 10000,
+          y: 10000,
+          z: 10000
+        }
+      },
+      xmlUrl
+    )
+      .then(group => {
+
+        console.log(group)
+
+        ssp.flyMainViewpoint('leftTop')
+
+      })
+
+  </script>
+</body>
+
+</html>
