@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SoonSpace Example</title>
+  <link rel="stylesheet" href="../../asstes/css/base.css">
+</head>
+
+<body>
+  <div id="view"></div>
+  <script src="../../sdk/index.js"></script>
+  <script>
+
+    const ssp = new SoonSpace({
+      el: '#view',
+      option: {
+        showInfo: true,
+        backgroundColor: 0x30030,
+      },
+      events: {}
+    })
+
+    let flame = ssp.createFlame({
+      texturePath: '../../asstes/img/effect/flame.png',
+      scale:{
+        x:1000,
+        y:1000,
+        z:1000
+      }
+    })
+
+    window.flame = flame
+
+    ssp.flyToObj(flame.mesh)
+
+    console.log(ssp.utils.getBoundingBox(flame.mesh))
+
+    const baseUrl = '../../asstes/model/sbm/yingtaidasha'
+    const mapsUrl = `${baseUrl}/Maps/`
+    const sbmsInfo = [
+      {
+        id: 'B1_0',
+        name: 'B1',
+        url: `${baseUrl}/yingtaidasha_B1_0.sbm`,
+        mapsUrl,
+        position: { x: 0, y: 0, z: 0 },
+        userData: {
+          modelCode: 'njnkjnkjnjdnkjnkjnm'
+        }
+      },
+      {
+        id: '1F',
+        name: '1F',
+        url: `${baseUrl}/yingtaidasha_1F_1.sbm`,
+        mapsUrl,
+        userData: {
+          aaaaaaa: 'a'
+        }
+      },
+      {
+        id: '2F',
+        name: '2F',
+        url: `${baseUrl}/yingtaidasha_2F_2.sbm`,
+        mapsUrl
+      },
+      {
+        id: '3F',
+        name: '3F',
+        url: `${baseUrl}/yingtaidasha_3F_3.sbm`,
+        mapsUrl,
+        userData: {
+          data: {
+            age: 17
+          }
+        }
+      },
+      {
+        id: '4F',
+        name: '4F',
+        url: `${baseUrl}/yingtaidasha_4F_4.sbm`,
+        mapsUrl,
+        userData: {
+          data: {
+            age: 18
+          }
+        }
+      },
+      {
+        id: '5F',
+        name: '5F',
+        url: `${baseUrl}/yingtaidasha_5F_5.sbm`,
+        mapsUrl,
+        userData: {
+          data: {
+            sex: '男'
+          }
+        }
+      },
+      {
+        id: '6F',
+        name: '6F',
+        url: `${baseUrl}/yingtaidasha_6F_6.sbm`,
+        mapsUrl
+      },
+      {
+        id: '7F',
+        name: '7F',
+        url: `${baseUrl}/yingtaidasha_7F_7.sbm`,
+        mapsUrl
+      }
+      // ...
+    ]
+
+    /**
+     * 加载 sbm˝
+     */
+    ssp.loadSbm(
+      sbmsInfo
+    ).then((models)=>{
+      console.log(models)
+      for(let i in models) {
+        models[i].renderOrder = Number.MAX_SAFE_INTEGER -7
+      }
+    })
+
+  </script>
+</body>
+
+</html>

@@ -100,7 +100,7 @@ GUI.prototype.addColor = function (option) {
     }
   })
 
-  const { label, checked } = option
+  const { label } = option
   const labelEl = this._addEle({
     tag: 'label',
     text: label,
@@ -116,7 +116,6 @@ GUI.prototype.addColor = function (option) {
       type: 'color'
     })
   )
-  addEl.checked = checked
 
   row.appendChild(addEl)
 
@@ -170,7 +169,7 @@ GUI.prototype.addRange = function (option) {
     }
   })
 
-  const { label, value, max, min } = option
+  const { label, value, max, min, step, unit } = option
   const labelEl = this._addEle({
     tag: 'label',
     text: label,
@@ -180,17 +179,41 @@ GUI.prototype.addRange = function (option) {
   })
   row.appendChild(labelEl)
 
+  const before = this._addEle({
+    tag: 'span',
+    text: min,
+    style: {
+      display: 'online-block',
+      padding: '0 4px',
+      color: '#fff',
+      fontSize: '12px'
+    }
+  })
+  row.appendChild(before)
+
   const addEl = this._addEle(
     Object.assign(option, {
       tag: 'input',
       type: 'range'
     })
   )
-  addEl.value = value
   addEl.max = max
   addEl.min = min
-
+  addEl.step = step
+  addEl.value = value
   row.appendChild(addEl)
+
+  const after = this._addEle({
+    tag: 'span',
+    text: max + unit,
+    style: {
+      display: 'online-block',
+      padding: '0 4px',
+      color: '#fff',
+      fontSize: '12px'
+    }
+  })
+  row.appendChild(after)
 
   this.GUI_El.appendChild(row)
 
@@ -265,8 +288,8 @@ GUI.prototype._addEle = function (option) {
   if (type) addEl.type = type
   if (id) addEl.id = id
   if (className) addEl.className = className
-  if (text) addEl.innerText = text
-  if (value) addEl.value = value
+  if (text !== null && text !== undefined) addEl.innerText = text
+  if (value !== null && value !== undefined) addEl.value = value
   // 样式
   if (style) this._setStyle(addEl, style)
   // 方法

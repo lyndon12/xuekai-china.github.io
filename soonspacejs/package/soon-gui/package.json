@@ -1,6 +1,6 @@
 {
   "name": "soon-gui",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "description": "soon-gui for soonspacejs example",
   "main": "index.js",
   "module": "index.es.js",

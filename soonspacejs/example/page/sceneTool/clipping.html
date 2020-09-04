@@ -78,18 +78,29 @@
       }
       // ...
     ]
-
     ssp.loadSbm(sbmsInfo)
 
       .then(models => {
 
         ssp.addAxishelper(10000)
 
-        ssp.xAxisClipping(5000)
+        ssp.sceneClipping({
+          axis: 'x',
+          position: 5000,
+          isForward: true
+        })
 
-        ssp.yAxisClipping(1000)
+        ssp.sceneClipping({
+          axis: 'y',
+          position: 1000,
+          isForward: true
+        })
 
-        ssp.zAxisClipping(0)
+        ssp.sceneClipping({
+          axis: 'z',
+          position: 0,
+          isForward: true
+        })
 
       })
 
@@ -102,8 +113,11 @@
       value: 5000,
       min: -5000,
       max: 13000,
-      onChange(e) {
-        ssp.changexAxisClipping(e.target.value)
+      onInput(e) {
+        ssp.changeSceneClipping({
+          axis: 'x',
+          position: e.target.value
+        })
       }
     })
 
@@ -112,18 +126,24 @@
       value: 1000,
       min: -1000,
       max: 5000,
-      onChange(e) {
-        ssp.changeyAxisClipping(e.target.value)
+      onInput(e) {
+        ssp.changeSceneClipping({
+          axis: 'y',
+          position: e.target.value
+        })
       }
     })
 
     gui.addRange({
       label: 'Z 轴切割:',
-      value: 0,
+      value: 5000,
       min: -5000,
       max: 5000,
-      onChange(e) {
-        ssp.changezAxisClipping(e.target.value)
+      onInput(e) {
+        ssp.changeSceneClipping({
+          axis: 'z',
+          position: e.target.value
+        })
       }
     })
 

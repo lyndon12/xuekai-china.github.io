@@ -37,7 +37,8 @@
       el: '#view',
       option: {
         backgroundColor: 0x333300,
-        showGrid: true
+        showGrid: true,
+        showInfo: true
       },
       events: {}
     })
@@ -54,6 +55,7 @@
       text: '创建 2D PoiNode',
       onClick() {
         const poi2DEl = el.cloneNode(true)
+        poi2DEl.style.display = 'block'
         poi2DEl.onclick = function () {
           alert('2D PoiNode click')
         }
@@ -85,7 +87,26 @@
             y: 40,
             z: 0
           },
+          scale: {
+            width: 2,
+            height: 2
+          },
           element: poi2_5DEl
+        })
+
+        ssp.createPoiNode({
+          type: '2.5D',
+          id: '2.5111DPoiNode',
+          position: {
+            x: 500,
+            y: 400,
+            z: 500
+          },
+          scale: {
+            width: 4,
+            height: 4
+          },
+          element: poi2_5DEl.cloneNode(true)
         })
       }
     })

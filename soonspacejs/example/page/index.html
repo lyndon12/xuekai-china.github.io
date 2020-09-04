@@ -129,7 +129,7 @@
       },
       computed: {
         codeBtnHref: function () {
-          return "https://github.com/xuekai-china/xuekai-china.github.io/tree/master/soonspacejs/page/" + this.iframeLink
+          return "https://github.com/xuekai-china/xuekai-china.github.io/tree/master/soonspacejs/example/page/" + this.iframeLink
         }
       },
       methods: {
@@ -149,8 +149,6 @@
 
             this.iframeLink = iframeLink
 
-            console.log(this.iframeLink)
-
           })
 
         },
@@ -164,8 +162,6 @@
             window.location.hash = hash;
 
             this.iframeLink = key;
-
-            console.log(this.iframeLink)
 
           })
 

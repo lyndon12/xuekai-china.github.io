@@ -198,6 +198,10 @@ export default [
         demoLink: "./camera/surround.html"
       },
       {
+        title: "相机跟随",
+        demoLink: "./camera/CameraFollower.html"
+      },
+      {
         title: "第一人称",
         demoLink: "./camera/firstPersonRoot.html"
       },
