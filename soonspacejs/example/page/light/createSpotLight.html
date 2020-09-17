@@ -99,61 +99,94 @@
       el: '#view'
     })
 
-    gui.addColor({
-      label: '环境光:',
-      onChange(e) {
-        if (!modelLoaded) return alert('模型未加载完成，请稍后！！！')
-        ssp.getLightById('defaultAmbientLight').color.set(e.target.value)
+    gui.addButton({
+      text: '添加点光源:',
+      onClick() {
+        // 隐藏这俩个光源是为了突出显示点光源，实际项目中不需要
+        ssp.getLightById('defaultAmbientLight').visible = false
+        ssp.getLightById('defaultDirectionalLight').visible = false
+
+        ssp.createSpotLight({
+          id: 'spotLight',
+          color: '#fff',
+          position: {
+            x: 1000,
+            y: 1000,
+            z: 1000
+          },
+          target: {
+            x: 1000,
+            y: 0,
+            z: 1000
+          },
+        })
       }
     })
 
-    let defaultAmbientLightPostionTransform = null
+    gui.addColor({
+      label: '点光源:',
+      value: 'red',
+      onChange(e) {
+        if (!modelLoaded) return alert('模型未加载完成，请稍后！！！')
+        ssp.getLightById("spotLight").color.set(e.target.value)
+      }
+    })
+
+    let spotLightPostionTransform = null
 
     gui.addButton({
-      text: '修改环境光位置',
+      text: '修改光源位置',
       onClick(e) {
-        if (!defaultAmbientLightPostionTransform) {
+        if (!spotLightPostionTransform) {
 
-          defaultAmbientLightPostionTransform = ssp.createTransform('defaultAmbientLight', {
-            object: ssp.getLightById("defaultAmbientLight")
+          spotLightPostionTransform = ssp.createTransform('spotLightPostion', {
+            object: ssp.getLightById("spotLight")
           })
 
         } else {
 
-          defaultAmbientLightPostionTransform.close()
-          defaultAmbientLightPostionTransform = null
+          spotLightPostionTransform.close()
+          spotLightPostionTransform = null
 
         }
 
       }
     })
 
-    gui.addColor({
-      label: '平行光:',
-      onChange(e) {
-        if (!modelLoaded) return alert('模型未加载完成，请稍后！！！')
-        ssp.getLightById('defaultDirectionalLight').color.set(e.target.value)
+
+    gui.addInput({
+      label: '照射x轴位置',
+      value: 1000,
+      onInput(e) {
+        ssp.nextRender(() => {
+          const { target } = ssp.getLightById("spotLight")
+          target.position.setX(Number(e.target.value))
+          target.updateMatrixWorld()
+        })
       }
     })
 
-    let defaultDirectionalLightPostionTransform = null
+    gui.addInput({
+      label: '照射y轴位置',
+      value: 0,
+      onInput(e) {
+        ssp.nextRender(() => {
+          const { target } = ssp.getLightById("spotLight")
+          target.position.setY(Number(e.target.value))
+          target.updateMatrixWorld()
+        })
+      }
+    })
 
-    gui.addButton({
-      text: '修改平行光位置',
-      onClick(e) {
-        if (!defaultDirectionalLightPostionTransform) {
-
-          defaultDirectionalLightPostionTransform = ssp.createTransform('defaultDirectionalLight', {
-            object: ssp.getLightById("defaultDirectionalLight")
-          })
-
-        } else {
-
-          defaultDirectionalLightPostionTransform.close()
-          defaultDirectionalLightPostionTransform = null
-
-        }
-
+    gui.addInput({
+      label: '照射z轴位置',
+      value: 1000,
+      onInput(e) {
+        ssp.nextRender(() => {
+          const { target } = ssp.getLightById("spotLight")
+          target.position.setZ(Number(e.target.value))
+          target.updateMatrixWorld()
+        })
       }
     })
 

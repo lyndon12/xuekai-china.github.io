@@ -62,9 +62,13 @@
       el: '#view',
       option: {
         showInfo: true,
-        showGrid: true
+        showGrid: false
       },
-      events: {}
+      events: {
+        selectPosition(p) {
+          console.log(p)
+        }
+      }     
     })
 
     const baseUrl = '../../asstes/model/sbm/yingtaidasha'
@@ -152,7 +156,14 @@
     )
       .then(models => {
         console.log('loaded models:', models)
+        models[0].parent.castShadow = true
+        models[0].parent.receiveShadow = true
         vm.loading = false
+
+        ssp.viewport.controls.enableOutOfScene = false
+      })
+      .catch(err => {
+        console.error(err)
       })
 
     // /**

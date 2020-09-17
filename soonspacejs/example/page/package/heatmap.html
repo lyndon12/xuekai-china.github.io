@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SoonSpace Example</title>
+  <link rel="stylesheet" href="../../asstes/css/base.css">
+</head>
+
+<body>
+  <div id="view"></div>
+  <script src="../../sdk/index.js"></script>
+  <script src="../../sdk/heatmap.js"></script>
+
+  <script>
+    const ssp = new SoonSpace({
+      el: '#view',
+      option: {
+        showInfo: true,
+        backgroundColor: 0x30030,
+      },
+      events: {}
+    })
+
+    let points = []
+    let max = 0
+    let width = 512
+    let height = 512
+    let len = 200
+    while (len--) {
+      var val = Math.floor(Math.random() * 100)
+      max = Math.max(max, val)
+      var point = {
+        x: Math.floor(Math.random() * width),
+        y: Math.floor(Math.random() * height),
+        value: val
+      }
+      points.push(point)
+    }
+    let data = {
+      max: max,
+      points: points
+    }
+
+    let heatMap = ssp.install(HeatMap)
+    heatMap.createHeatMap({
+      containerId: 'view',
+      data: data,
+      rotation: {
+        x: -Math.PI / 2,
+        y: 0,
+        z: 0
+      }
+    })
+
+    window.obj = heatMap.targetMesh
+  </script>
+</body>
+
+</html>

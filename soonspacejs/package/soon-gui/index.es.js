@@ -169,7 +169,7 @@ GUI.prototype.addRange = function (option) {
     }
   })
 
-  const { label, value, max, min, step, unit } = option
+  const { label, value, max, min, step, unit = '' } = option
   const labelEl = this._addEle({
     tag: 'label',
     text: label,
@@ -194,7 +194,10 @@ GUI.prototype.addRange = function (option) {
   const addEl = this._addEle(
     Object.assign(option, {
       tag: 'input',
-      type: 'range'
+      type: 'range',
+      style: {
+        verticalAlign: 'middle'
+      }
     })
   )
   addEl.max = max

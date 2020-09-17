@@ -217,6 +217,10 @@ export default [
         title: "灯光配置",
         demoLink: "./light/lightOption.html"
       },
+      {
+        title: "创建点光源",
+        demoLink: "./light/createSpotLight.html"
+      },
     ]
   },
   // topology
@@ -236,6 +240,10 @@ export default [
       {
         title: "更多功能",
         demoLink: "./topology/moreFunc.html"
+      },
+      {
+        title: "第三人称巡检",
+        demoLink: "./topology/thirdPersonAutoPatrol.html"
       }
     ]
   },
@@ -260,6 +268,18 @@ export default [
       {
         title: "越界计算",
         demoLink: "./math/strideOverCompute.html"
+      }
+    ]
+  },
+  // 插件
+  {
+    title: "插件",
+    icon: "bank",
+    key: "package",
+    children: [
+      {
+        title: "热力图",
+        demoLink: "./package/heatmap.html"
       }
     ]
   },

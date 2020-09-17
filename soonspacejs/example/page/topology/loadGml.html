@@ -37,8 +37,10 @@
     gui.addButton({
       text: '加载 Gml',
       onClick() {
-        ssp.loadGml({ id: 'gml' }, '../../asstes/model/sbm/hzl/hzl.gml')
-          .then(gml => console.log('gml', gml))
+        ssp.loadGml({ id: 'gml', visible: false }, '../../asstes/model/sbm/hzl/hzl.gml')
+          .then(gml => {
+            console.log('gml', gml)
+          })
       }
     })
 
@@ -48,6 +50,31 @@
         ssp.clearTopology()
       }
     })
+
+    // let id = null
+    // const moevLen = 1000
+
+    // const floor = ssp.getSbmById(id)
+
+    // const { x, y, z } = floor.position
+    // floor.setMove({
+    //   x: x + moevLen,
+    //   y,
+    //   z
+    // })
+
+    // const aboutModel = ssp.getSbmByUserDataProperty('pid', floor.sid)
+
+    // aboutModel.forEach(item => {
+
+    //   const { x, y, z } = item.position
+    //   item.setMove({
+    //     x: x + moevLen,
+    //     y,
+    //     z
+    //   })
+
+    // })
 
   </script>
 </body>
