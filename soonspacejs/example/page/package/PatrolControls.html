@@ -11,15 +11,14 @@
 
 <body>
   <div id="view"></div>
-
   <script src="../../sdk/index.js"></script>
+  <script src="../../sdk/PatrolControls.js"></script>
   <script src="../../../package/soon-gui/index.js"></script>
 
   <script>
 
     let pathGroup = null
     let shortestPath = null
-    let patrol = null
     let isPause = false
 
     const ssp = new SoonSpace({
@@ -82,24 +81,28 @@
       }
     })
 
+    const patrolControls = ssp.install(PatrolControls)
+
     const autoPatrolBtn = gui.addButton({
       text: '开始导航',
       style: {
         display: 'none'
       },
       onClick() {
-        patrol = ssp.autoPatrol({
+
+        patrolControls.start({
           mode: 'firstPerson',
-          lookAtY: 0,
+          lookAtY: 50,
           path: shortestPath,
-          naviSpeed: 3,
+          naviSpeed: 1,
           eyeHeight: 100,
+          onUpdate: (a, b) => console.log('onUpdate', a),
           onEnd: () => console.log('onEnd')
         })
 
         pauseBtn.parentNode.show()
         stopBtn.parentNode.show()
-
+        // thirdPersonBtn.parentNode.show()
       }
     })
 
@@ -114,12 +117,12 @@
 
         if (isPause) {
 
-          patrol.pause()
+          patrolControls.pause()
           pauseBtn.innerHTML = '继续'
 
         } else {
 
-          patrol.following()
+          patrolControls.resume()
           pauseBtn.innerHTML = '暂停'
 
         }
@@ -133,13 +136,34 @@
         display: 'none'
       },
       onClick() {
-        ssp.stopAutoPatrol()
+        patrolControls.stop()
 
         pauseBtn.parentNode.hide()
         stopBtn.parentNode.hide()
+        // thirdPersonBtn.parentNode.hide()
 
       }
     })
+
+    // const thirdPersonBtn = gui.addButton({
+    //   text: '第三人称',
+    //   style: {
+    //     display: 'none'
+    //   },
+    //   onClick() {
+
+    //     if (thirdPersonBtn.innerText === '第三人称') {
+
+    //       thirdPersonBtn.innerText = '第一人称'
+
+    //     } else if (thirdPersonBtn.innerText === '第一人称') {
+
+    //       thirdPersonBtn.innerText = '第三人称'
+
+    //     }
+
+    //   }
+    // })
 
   </script>
 </body>

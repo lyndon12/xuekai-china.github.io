@@ -41,10 +41,6 @@ button:focus{
   outline: none !important;
 }
 
-label {
-  color: white;
-}
-
 #view,
 #app {
   position: absolute;

@@ -35,12 +35,38 @@
     })
 
     gui.addButton({
-      text: '加载 Gml',
+      text: '创建拓扑路径',
       onClick() {
-        ssp.loadGml({ id: 'gml' }, '../../asstes/model/sbm/hzl/hzl.gml')
-          .then(gml => {
-            console.log('gml', gml)
-          })
+
+        ssp.createTopology(
+          [
+            {
+              x: 0,
+              y: 0,
+              z: 0,
+            },
+            {
+              x: 0,
+              y: 0,
+              z: 100,
+            },
+            {
+              x: 100,
+              y: 0,
+              z: 100,
+            },
+            {
+              x: 100,
+              y: 0,
+              z: 0,
+            },
+          ],
+          {
+            radius: 5,
+            color: 0xff0000,
+          }
+        )
+
       }
     })
 

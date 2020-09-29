@@ -234,6 +234,10 @@ export default [
         demoLink: "./topology/loadGml.html"
       },
       {
+        title: "创建 topology 路径",
+        demoLink: "./topology/createTopology.html"
+      },
+      {
         title: "操控 topology 路径",
         demoLink: "./topology/transformTopology.html"
       },
@@ -280,6 +284,10 @@ export default [
       {
         title: "热力图",
         demoLink: "./package/heatmap.html"
+      },
+      {
+        title: "webworker 加载",
+        demoLink: "./package/SbmLoaderWebWorker.html"
       }
     ]
   },

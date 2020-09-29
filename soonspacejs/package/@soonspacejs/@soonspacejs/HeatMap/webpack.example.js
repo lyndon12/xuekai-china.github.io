@@ -4,7 +4,7 @@ module.exports = {
   entry: './index.js',
   output: {
     path: path.resolve(__dirname, '../../../example/sdk/'),
-    filename: 'heatmap.js',
+    filename: 'HeatMap.js',
     libraryTarget: 'umd',
     umdNamedDefine: true
   },

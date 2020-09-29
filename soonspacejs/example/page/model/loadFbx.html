@@ -11,7 +11,10 @@
 
 <body>
   <div id="view"></div>
+
   <script src="../../sdk/index.js"></script>
+  <script src="../../../package/soon-gui/index.js"></script>
+
   <script>
 
     const ssp = new SoonSpace({
@@ -26,14 +29,7 @@
       }
     })
 
-    // const ground = ssp.createGround({
-    //   imgUrl: '../../asstes/img/ground/004.jpg',
-    //   width: 500,
-    //   height: 500,
-    //   opacity: 1,
-    //   position: { x: 0, y: 0, z: 0 },
-    //   repeat: { width: 10, height: 10 }
-    // })
+    let model = null
 
     ssp.loadModel({
       id: 'firstGltfGroup',
@@ -44,9 +40,21 @@
       }
     })
       .then(fbx => {
-        console.log(fbx)
+        model = fbx
 
-        ssp.flyToObj(fbx)
+        ssp.flyToObj(fbx, 'leftTop')
+      })
+
+      const gui = new GUI({
+        el: '#view'
+      })
+
+      gui.addCheckBox({
+        label: '模型动画',
+        onChange(e) {
+          if(e.target.checked)model.playAnimation()
+          else model.stopAnimation()
+        }
       })
 
   </script>

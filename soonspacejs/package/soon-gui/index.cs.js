@@ -6,25 +6,52 @@ function GUI(option) {
 
   const GUI_El = document.createElement('div')
   this.GUI_El = GUI_El
+
   this._setStyle(GUI_El, {
+    maxHeight: '100%',
     position: 'absolute',
     padding: '4px 24px',
-    backgroundColor: 'rgba(0, 0, 0, 0.25)',
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
     top: 0,
     right: 0,
     zIndex: 10,
-    fontSize: '14px'
+    fontSize: '12px',
+    overflow: 'auto'
   })
+
   if (gui) {
+
     const { id, style } = gui
 
     if (id) GUI_El.id = id
     if (style) this._setStyle(GUI_El, style)
+
   }
 
   const APPEND_EL = document.querySelector(el)
   if (APPEND_EL) APPEND_EL.appendChild(GUI_El)
   else document.body.appendChild(GUI_El)
+
+}
+
+GUI.prototype.addTitle = function (option) {
+
+  const { style = {}, text } = option
+
+  const addEl = this._addEle({
+    tag: 'div',
+    text,
+    style: Object.assign({
+      fontSize: '14px',
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      color: '#fff',
+      padding: '4px 18px'
+    }, style)
+  })
+
+  this.GUI_El.appendChild(addEl)
+
+  return addEl
 
 }
 
@@ -44,7 +71,7 @@ GUI.prototype.addButton = function (option) {
       tag: 'button'
     }, {
       style: {
-        color: '#ffffff'
+        color: '#ccc'
       }
     })
   )
@@ -66,14 +93,8 @@ GUI.prototype.addInput = function (option) {
   })
 
   const { label, checked } = option
-  const labelEl = this._addEle({
-    tag: 'label',
-    text: label,
-    style: {
-      paddingRight: '8px'
-    }
-  })
-  row.appendChild(labelEl)
+
+  row.appendChild(this._addLabel({ text: label }))
 
   const addEl = this._addEle(
     Object.assign(option, {
@@ -101,14 +122,8 @@ GUI.prototype.addColor = function (option) {
   })
 
   const { label } = option
-  const labelEl = this._addEle({
-    tag: 'label',
-    text: label,
-    style: {
-      paddingRight: '8px'
-    }
-  })
-  row.appendChild(labelEl)
+
+  row.appendChild(this._addLabel({ text: label }))
 
   const addEl = this._addEle(
     Object.assign(option, {
@@ -135,14 +150,8 @@ GUI.prototype.addCheckBox = function (option) {
   })
 
   const { label, checked } = option
-  const labelEl = this._addEle({
-    tag: 'label',
-    text: label,
-    style: {
-      paddingRight: '8px'
-    }
-  })
-  row.appendChild(labelEl)
+
+  row.appendChild(this._addLabel({ text: label }))
 
   const addEl = this._addEle(
     Object.assign(option, {
@@ -170,14 +179,8 @@ GUI.prototype.addRange = function (option) {
   })
 
   const { label, value, max, min, step, unit = '' } = option
-  const labelEl = this._addEle({
-    tag: 'label',
-    text: label,
-    style: {
-      paddingRight: '8px'
-    }
-  })
-  row.appendChild(labelEl)
+
+  row.appendChild(this._addLabel({ text: label }))
 
   const before = this._addEle({
     tag: 'span',
@@ -185,7 +188,7 @@ GUI.prototype.addRange = function (option) {
     style: {
       display: 'online-block',
       padding: '0 4px',
-      color: '#fff',
+      color: '#ccc',
       fontSize: '12px'
     }
   })
@@ -212,7 +215,7 @@ GUI.prototype.addRange = function (option) {
     style: {
       display: 'online-block',
       padding: '0 4px',
-      color: '#fff',
+      color: '#ccc',
       fontSize: '12px'
     }
   })
@@ -271,10 +274,13 @@ GUI.prototype._addLabel = function (option) {
   const { text } = option
 
   const labelEl = this._addEle({
-    tag: 'label',
+    tag: 'span',
     text,
     style: {
-      paddingRight: '8px'
+      paddingRight: '8px',
+      color: '#ccc',
+      minWidth: '100px',
+      display: "inline-block"
     }
   })
 

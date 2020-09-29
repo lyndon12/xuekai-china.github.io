@@ -41,6 +41,11 @@
           console.log('Global modelDblClick event', param)
           alert('Global modelDblClick event')
 
+        },
+        selectPosition(position) {
+
+          console.log('selectPosition', position)
+
         }
       }
     })
@@ -72,6 +77,8 @@
       mapsUrl,
       position: { x: 1000, y: 0, z: 1000 },
       onClick() {
+
+        ssp.opacityShow(this)
 
         if (clickCheck.checked) this.eventPropagation()
 

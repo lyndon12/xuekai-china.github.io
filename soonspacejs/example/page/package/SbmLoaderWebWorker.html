@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SoonSpace Example</title>
+  <link rel="stylesheet" href="../../asstes/css/base.css">
+</head>
+
+<body>
+  <div id="view"></div>
+  <script src="../../sdk/index.js"></script>
+  <script src="../../sdk/SbmLoaderWebWorker.js"></script>
+
+  <script>
+
+    const ssp = new SoonSpace({
+      el: '#view',
+      option: {
+        showInfo: true,
+        showGrid: true,
+        useIndexedDB: true
+      },
+      events: {
+        modelClick(e) {
+          console.log(e)
+        }
+      }
+    })
+
+    const baseUrl = '../../asstes/model/sbm/BOX'
+    const mapsUrl = `${baseUrl}/Maps/`
+
+    const sbmsInfo = [
+      {
+        id: 'B1',
+        name: 'B1',
+        url: `${baseUrl}/BOX_1F_0.sbm`,
+        mapsUrl
+      },
+    ]
+
+    for (let i = 0; i < 100; i++) {
+      sbmsInfo.push({
+        id: 'B1',
+        name: 'B1',
+        url: `${baseUrl}/BOX_1F_0.sbm`,
+        mapsUrl,
+        position: {
+          x: i * 500,
+          y: 0,
+          z: 0
+        }
+      })
+    }
+
+    // ssp.setSbmWorkerUrl('../../sdk/SbmLoaderWebWorker.js')
+    
+    ssp.loadSbm(sbmsInfo)
+      .then(() => {
+        ssp.flyMainViewpoint()
+      })
+
+  </script>
+</body>
+
+</html>

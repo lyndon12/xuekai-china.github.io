@@ -17,12 +17,13 @@
     const ssp = new SoonSpace({
       el: '#view',
       option: {
-        hoverEnabled: true
+        hoverEnabled: false
       },
       events: {
         modelClick(param) {
 
           console.log('modelClick', param)
+          console.log([...new Set(param.intersects)])
 
         },
         modelRightClick(param) {
@@ -69,15 +70,12 @@
 
     })
 
-    // 样例模型服务地址
     const baseUrl = '../../asstes/model/sbm/yingtaidasha'
-
     const mapsUrl = `${baseUrl}/Maps/`
-
     const sbmsInfo = [
       {
-        id: '1F',
-        name: '1F',
+        id: 'B1',
+        name: 'B1',
         url: `${baseUrl}/yingtaidasha_B1_0.sbm`,
         mapsUrl
       },

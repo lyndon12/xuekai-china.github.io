@@ -34,7 +34,7 @@
 
     let model1, model2, plane;
 
-    ssp.loadSbm([
+    ssp.loadSbm(
       {
         id: '1',
         name: '1',
@@ -50,34 +50,25 @@
           z: 100
         },
         mapsUrl
-      },
-      {
-        id: '2',
-        name: '2',
-        url: `${baseUrl}/xinglongzhan.sbm`,
-        rotation: {
-          x: Math.PI / 2,
-          y: 0,
-          z: 0
-        },
-        scale: {
-          x: 100,
-          y: 100,
-          z: 100
-        },
-        mapsUrl
       }
-    ])
-      .then(models => {
+    )
+      .then(model => {
+
+        model1 = model
+
+        return ssp.cloneSbm(model, { id: 'cloneFloor' })
+
+      })
+
+      .then(model => {
+
+        model2 = model
 
         ssp.flyMainViewpoint()
 
         plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), -3000)
         const help = new THREE.PlaneHelper(plane, 50000, 'rgb(42, 87, 166)')
         ssp.manager.helperManager.scene.add(help)
-
-        model1 = models[0]
-        model2 = models[1]
 
         ssp.opacityShow(model2, { color: 'rgb(42, 87, 166)', opacity: 0.5 })
 

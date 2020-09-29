@@ -12,39 +12,41 @@
 <body>
   <div id="view"></div>
   <script src="../../sdk/index.js"></script>
-  <script src="../../sdk/heatmap.js"></script>
+  <script src="../../sdk/HeatMap.js"></script>
 
   <script>
     const ssp = new SoonSpace({
       el: '#view',
       option: {
-        showInfo: true,
-        backgroundColor: 0x30030,
+        showInfo: true
       },
       events: {}
     })
 
-    let points = []
+    const points = []
     let max = 0
-    let width = 512
-    let height = 512
+    const width = 512
+    const height = 512
     let len = 200
+    
     while (len--) {
-      var val = Math.floor(Math.random() * 100)
+      const val = Math.floor(Math.random() * 100)
       max = Math.max(max, val)
-      var point = {
+
+      const point = {
         x: Math.floor(Math.random() * width),
         y: Math.floor(Math.random() * height),
         value: val
       }
+
       points.push(point)
     }
-    let data = {
+    const data = {
       max: max,
       points: points
     }
 
-    let heatMap = ssp.install(HeatMap)
+    const heatMap = ssp.install(HeatMap)
     heatMap.createHeatMap({
       containerId: 'view',
       data: data,
@@ -55,7 +57,6 @@
       }
     })
 
-    window.obj = heatMap.targetMesh
   </script>
 </body>
 

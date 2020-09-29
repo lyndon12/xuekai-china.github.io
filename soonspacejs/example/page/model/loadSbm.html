@@ -155,12 +155,16 @@
       progress => vm.progress = JSON.parse(JSON.stringify(progress))
     )
       .then(models => {
-        console.log('loaded models:', models)
+
+        ssp.flyMainViewpoint()
+
         models[0].parent.castShadow = true
         models[0].parent.receiveShadow = true
+
         vm.loading = false
 
         ssp.viewport.controls.enableOutOfScene = false
+        
       })
       .catch(err => {
         console.error(err)
