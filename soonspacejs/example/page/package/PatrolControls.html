@@ -33,6 +33,7 @@
       .then(group => {
 
         ssp.flyMainViewpoint()
+        ssp.updateDefaultDirectionalLight()
 
       })
 
@@ -96,7 +97,7 @@
           path: shortestPath,
           naviSpeed: 1,
           eyeHeight: 100,
-          onUpdate: (a, b) => console.log('onUpdate', a),
+          // onUpdate: (a, b) => console.log('onUpdate', a),
           onEnd: () => console.log('onEnd')
         })
 

@@ -24,7 +24,7 @@ button {
   min-width: 120px;
   display: inline-block;
   border-radius: 4px;
-  background-color: black;
+  background-color: #333;
   color: white;
   font-size: 12px;
   height: 24px;
@@ -32,7 +32,7 @@ button {
 }
 
 button:hover{
-  background-color: #333;
+  background-color: #444;
 }
 button:active{
   background-color: #3f3f3f;

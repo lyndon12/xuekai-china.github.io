@@ -62,23 +62,27 @@
       el: '#view',
       option: {
         showInfo: true,
-        showGrid: false
+        showGrid: false,
+        modelConfig: {
+          textureMap: {
+            maxSize: 1024,
+            minSize: 2
+          }
+        }
       },
       events: {
         selectPosition(p) {
           console.log(p)
         }
-      }     
+      }
     })
 
     const baseUrl = '../../asstes/model/sbm/yingtaidasha'
-    const mapsUrl = `${baseUrl}/Maps/`
     const sbmsInfo = [
       {
         id: 'B1_0',
         name: 'B1',
         url: `${baseUrl}/yingtaidasha_B1_0.sbm`,
-        mapsUrl,
         position: { x: 0, y: 0, z: 0 },
         userData: {
           modelCode: 'njnkjnkjnjdnkjnkjnm'
@@ -88,7 +92,6 @@
         id: '1F',
         name: '1F',
         url: `${baseUrl}/yingtaidasha_1F_1.sbm`,
-        mapsUrl,
         userData: {
           aaaaaaa: 'a'
         }
@@ -97,13 +100,11 @@
         id: '2F',
         name: '2F',
         url: `${baseUrl}/yingtaidasha_2F_2.sbm`,
-        mapsUrl
       },
       {
         id: '3F',
         name: '3F',
         url: `${baseUrl}/yingtaidasha_3F_3.sbm`,
-        mapsUrl,
         userData: {
           data: {
             age: 17
@@ -114,7 +115,6 @@
         id: '4F',
         name: '4F',
         url: `${baseUrl}/yingtaidasha_4F_4.sbm`,
-        mapsUrl,
         userData: {
           data: {
             age: 18
@@ -125,7 +125,6 @@
         id: '5F',
         name: '5F',
         url: `${baseUrl}/yingtaidasha_5F_5.sbm`,
-        mapsUrl,
         userData: {
           data: {
             sex: '男'
@@ -136,13 +135,11 @@
         id: '6F',
         name: '6F',
         url: `${baseUrl}/yingtaidasha_6F_6.sbm`,
-        mapsUrl
       },
       {
         id: '7F',
         name: '7F',
         url: `${baseUrl}/yingtaidasha_7F_7.sbm`,
-        mapsUrl
       }
       // ...
     ]
@@ -164,7 +161,7 @@
         vm.loading = false
 
         ssp.viewport.controls.enableOutOfScene = false
-        
+
       })
       .catch(err => {
         console.error(err)
@@ -246,10 +243,10 @@
         } else {
 
           ssp.hideAllSbm()
-         
-          const floor =  ssp.getSbmById(e.target.value)
 
-          if( floor ) {
+          const floor = ssp.getSbmById(e.target.value)
+
+          if (floor) {
             floor.show()
             ssp.flyToObj(floor)
           }

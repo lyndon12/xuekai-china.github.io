@@ -13,4 +13,4 @@ soonspacejs/example/asstes/model/json/1_line.json
 soonspacejs/example/sdk/index.sbm.js
 
 # package
-soonspacejs/package/@soonspacejs/**/src
+soonspacejs/package/@soonspacejs

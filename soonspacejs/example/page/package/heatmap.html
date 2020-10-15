@@ -25,10 +25,10 @@
 
     const points = []
     let max = 0
-    const width = 512
+    const width = 1024
     const height = 512
-    let len = 200
-    
+    let len = 500
+
     while (len--) {
       const val = Math.floor(Math.random() * 100)
       max = Math.max(max, val)
@@ -36,7 +36,8 @@
       const point = {
         x: Math.floor(Math.random() * width),
         y: Math.floor(Math.random() * height),
-        value: val
+        value: val,
+        radius: 20
       }
 
       points.push(point)
@@ -48,12 +49,21 @@
 
     const heatMap = ssp.install(HeatMap)
     heatMap.createHeatMap({
-      containerId: 'view',
       data: data,
-      rotation: {
-        x: -Math.PI / 2,
-        y: 0,
-        z: 0
+      canvasStyle: {
+        width,
+        height
+      },
+      gradient: {
+        0.2: "rgb(0,0,255)",
+        0.4: "rgb(0,255,0)",
+        0.6: "yellow",
+        0.8: "orange",
+        1.0: "rgb(255,0,0)"
+      },
+      scale: {
+        x: 10,
+        y: 10
       }
     })
 

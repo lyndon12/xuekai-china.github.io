@@ -26,6 +26,8 @@
       events: {}
     })
 
+
+
     const baseUrl = '../../asstes/model/sbm/yingtaidasha'
     const mapsUrl = `${baseUrl}/Maps/`
     const sbmsInfo = [
@@ -111,6 +113,43 @@
 
     const gui = new GUI({
       el: '#view'
+    })
+
+    gui.addTitle({
+      text: '基础'
+    })
+
+    gui.addCheckBox({
+      label: '开始控制器',
+      checked: true,
+      onChange(e) {
+        ssp.viewport.controls.enabled = e.target.checked
+      }
+    })
+
+    gui.addCheckBox({
+      label: '以拾取点交互',
+      checked: true,
+      onChange(e) {
+        ssp.viewport.controls.enabledPickupPosition = e.target.checked
+      }
+    })
+
+    gui.addSelect({
+      label: '交互中心点模式',
+      options: [
+        {
+          label: '场景中心点',
+          value: 'scene'
+        },
+        {
+          label: '屏幕中心点',
+          value: 'dom'
+        }
+      ],
+      onChange(e) {
+        ssp.viewport.controls.centerPositionType = e.target.value
+      }
     })
 
     gui.addTitle({

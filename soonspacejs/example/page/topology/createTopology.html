@@ -30,6 +30,19 @@
         ssp.flyMainViewpoint()
       })
 
+    function createTopology(id, points) {
+      return ssp.createTopologyToGroup(
+        {
+          id
+        },
+        points,
+        {
+          radius: 5,
+          color: 0xff0000,
+        }
+      )
+    }
+
     const gui = new GUI({
       el: '#view'
     })
@@ -38,7 +51,8 @@
       text: '创建拓扑路径',
       onClick() {
 
-        ssp.createTopology(
+        const t = createTopology(
+          'createTopology',
           [
             {
               x: 0,
@@ -48,27 +62,60 @@
             {
               x: 0,
               y: 0,
-              z: 100,
+              z: 1000,
             },
             {
-              x: 100,
+              x: 1000,
               y: 0,
-              z: 100,
+              z: 1000,
             },
             {
-              x: 100,
+              x: 1000,
               y: 0,
               z: 0,
             },
-          ],
-          {
-            radius: 5,
-            color: 0xff0000,
-          }
+          ]
         )
+
+        console.log(t)
 
       }
     })
+
+    let manualTopology = null
+    const manualPoints = []
+
+    function manualCreateTopology(position) {
+
+      manualPoints.push(position)
+
+      if (manualTopology) {
+        ssp.removeTopologyGroupById(manualTopology.sid)
+        manualTopology = null
+      }
+
+      manualTopology = createTopology('manualCreateTopology', manualPoints)
+
+    }
+
+    gui.addButton({
+      text: '手动生成路径',
+      onClick() {
+
+        ssp.viewport.signals.selectPosition.add(manualCreateTopology)
+
+      }
+    })
+
+    gui.addButton({
+      text: '停止手动生成路径',
+      onClick() {
+
+        ssp.viewport.signals.selectPosition.remove(manualCreateTopology)
+
+      }
+    })
+
 
     gui.addButton({
       text: '清空 Gml',
