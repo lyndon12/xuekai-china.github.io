@@ -3,11 +3,11 @@ export default [
   {
     title: "起步",
     icon: "bank",
-    key: "hello",
+    key: "start",
     children: [
       {
         title: "Hello World",
-        demoLink: "./hello/helloWorld.html"
+        demoLink: "./start/helloWorld.html"
       }
     ]
   },
@@ -283,7 +283,11 @@ export default [
     children: [
       {
         title: "热力图",
-        demoLink: "./package/heatmap.html"
+        demoLink: "./package/HeatMap.html"
+      },
+      {
+        title: "巡检控制器",
+        demoLink: "./package/PatrolControls.html"
       },
       {
         title: "webworker 加载",

@@ -15,13 +15,21 @@
   </div>
   <script src="../../sdk/index.js"></script>
   <script>
-     window.ssp = new SoonSpace({
+    window.ssp = new SoonSpace({
       // 绑定场景的元素选择器
       el: '#view',
       // 初始配置项
       option: {
-        // 背景色 十六进制
-        backgroundColor: 0x333300,
+        // 背景色
+        background: {
+          color: 'black',
+          // img: '../../asstes/img/background/1.jpg',
+          // skyBox: {
+          //   dirPath: '../../asstes/img/skybox/sunny/',
+          //   fileNames: ['px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'pz.jpg', 'nz.jpg']
+          // },
+          alpha: false
+        },
         // 是否显示网格
         showGrid: true,
         // 是否显示左下角的加载数量信息

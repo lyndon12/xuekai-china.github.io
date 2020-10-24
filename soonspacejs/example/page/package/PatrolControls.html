@@ -19,7 +19,6 @@
 
     let pathGroup = null
     let shortestPath = null
-    let isPause = false
 
     const ssp = new SoonSpace({
       el: '#view',
@@ -33,13 +32,14 @@
       .then(group => {
 
         ssp.flyMainViewpoint()
-        ssp.updateDefaultDirectionalLight()
 
       })
 
     const gui = new GUI({
       el: '#view'
     })
+
+    const patrolControls = ssp.install(PatrolControls)
 
     gui.addButton({
       text: '加载路径',
@@ -82,8 +82,6 @@
       }
     })
 
-    const patrolControls = ssp.install(PatrolControls)
-
     const autoPatrolBtn = gui.addButton({
       text: '开始导航',
       style: {
@@ -97,13 +95,11 @@
           path: shortestPath,
           naviSpeed: 1,
           eyeHeight: 100,
-          // onUpdate: (a, b) => console.log('onUpdate', a),
           onEnd: () => console.log('onEnd')
         })
 
         pauseBtn.parentNode.show()
         stopBtn.parentNode.show()
-        // thirdPersonBtn.parentNode.show()
       }
     })
 
@@ -113,21 +109,17 @@
         display: 'none'
       },
       onClick() {
-
-        isPause = !isPause
-
-        if (isPause) {
-
-          patrolControls.pause()
-          pauseBtn.innerHTML = '继续'
-
-        } else {
+        if (patrolControls.isPaused) {
 
           patrolControls.resume()
           pauseBtn.innerHTML = '暂停'
 
-        }
+        } else {
 
+          patrolControls.pause()
+          pauseBtn.innerHTML = '继续'
+
+        }
       }
     })
 
@@ -141,30 +133,9 @@
 
         pauseBtn.parentNode.hide()
         stopBtn.parentNode.hide()
-        // thirdPersonBtn.parentNode.hide()
 
       }
     })
-
-    // const thirdPersonBtn = gui.addButton({
-    //   text: '第三人称',
-    //   style: {
-    //     display: 'none'
-    //   },
-    //   onClick() {
-
-    //     if (thirdPersonBtn.innerText === '第三人称') {
-
-    //       thirdPersonBtn.innerText = '第一人称'
-
-    //     } else if (thirdPersonBtn.innerText === '第一人称') {
-
-    //       thirdPersonBtn.innerText = '第三人称'
-
-    //     }
-
-    //   }
-    // })
 
   </script>
 </body>
