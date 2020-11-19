@@ -46,10 +46,6 @@ export default [
     key: "modelTool",
     children: [
       {
-        title: "操控模型",
-        demoLink: "./modelTool/transformModel.html"
-      },
-      {
         title: "模型跟随鼠标",
         demoLink: "./modelTool/followMouse.html"
       },
@@ -140,6 +136,10 @@ export default [
       {
         title: "天空盒",
         demoLink: "./background/skyBox.html"
+      },
+      {
+        title: "球体天空盒",
+        demoLink: "./background/sphereSkyBox.html"
       }
     ]
   },
@@ -288,6 +288,10 @@ export default [
       {
         title: "巡检控制器",
         demoLink: "./package/PatrolControls.html"
+      },
+      {
+        title: "操控模型",
+        demoLink: "./package/transform-controls.html"
       },
       {
         title: "webworker 加载",

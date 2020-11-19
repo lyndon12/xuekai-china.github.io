@@ -30,54 +30,50 @@
         ssp.flyMainViewpoint()
       })
 
-    function createTopology(id, points) {
-      return ssp.createTopologyToGroup(
-        {
-          id
-        },
-        points,
-        {
-          radius: 5,
-          color: 0xff0000,
-        }
-      )
-    }
-
     const gui = new GUI({
       el: '#view'
     })
+
+    const pointColors = [0xff0000, 0x00ff00, 0x0000ff]
+    const topologyColors = [0x0000ff, 0xff0000, 0x00ff00]
 
     gui.addButton({
       text: '创建拓扑路径',
       onClick() {
 
-        const t = createTopology(
-          'createTopology',
+        const group = ssp.createTopologyToGroup(
+          {
+            id: 'topologyGroup'
+          },
           [
             {
               x: 0,
-              y: 0,
+              y: 10,
               z: 0,
             },
             {
               x: 0,
-              y: 0,
-              z: 1000,
+              y: 10,
+              z: 1500,
             },
             {
-              x: 1000,
-              y: 0,
-              z: 1000,
+              x: 1500,
+              y: 10,
+              z: 1500,
             },
             {
-              x: 1000,
-              y: 0,
+              x: 1500,
+              y: 10,
               z: 0,
             },
-          ]
+          ],
+          {
+            pointColors,
+            topologyColors
+          }
         )
 
-        console.log(t)
+        ssp.flyToObj(group)
 
       }
     })
@@ -87,14 +83,23 @@
 
     function manualCreateTopology(position) {
 
-      manualPoints.push(position)
+      manualPoints.push(position.setY(position.y + 10))
 
       if (manualTopology) {
         ssp.removeTopologyGroupById(manualTopology.sid)
         manualTopology = null
       }
 
-      manualTopology = createTopology('manualCreateTopology', manualPoints)
+      manualTopology = ssp.createTopologyToGroup(
+        {
+          id: 'manualCreateTopology'
+        },
+        manualPoints,
+        {
+          pointColors,
+          topologyColors
+        }
+      )
 
     }
 
@@ -115,7 +120,6 @@
 
       }
     })
-
 
     gui.addButton({
       text: '清空 Gml',

@@ -16,23 +16,36 @@
   <script src="../../../package/soon-gui/index.js"></script>
 
   <script>
+
     const ssp = new SoonSpace({
       el: '#view',
-      option: {
-      },
+      option: {},
       events: {}
     })
+
+    ssp.setSphereSkyBackground('../../asstes/img/skybox/天空球3.jpg') 
 
     const gui = new GUI({
       el: '#view'
     })
 
-    gui.addColor({
-      label: '背景色',
-      onInput(e) {
-        ssp.setBackgroundColor(e.target.value)
+    gui.addSelect({
+      label: '天空风格',
+      options: [
+        {
+          label: '天空球3',
+          value: '天空球3'
+        },
+        {
+          label: '星空球2',
+          value: '星空球2'
+        },
+      ],
+      onChange(e) {
+        ssp.setSphereSkyBackground(`../../asstes/img/skybox/${e.target.value}.jpg`)
       }
     })
+    
   </script>
 </body>
 

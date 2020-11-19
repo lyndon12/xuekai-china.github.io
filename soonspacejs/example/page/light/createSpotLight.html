@@ -18,95 +18,79 @@
 
   <script>
 
-    let modelLoaded = false
-
     let ssp = new SoonSpace({
       el: '#view',
       option: {
-        backgroundColor: 0x333300,
         showGrid: false
       },
       events: {}
     })
 
-    ssp.setSkyBackground('../../asstes/img/skybox/sunny/', ['px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'pz.jpg', 'nz.jpg']);
-
     const baseUrl = '../../asstes/model/sbm/yingtaidasha'
-    const mapsUrl = `${baseUrl}/Maps/`
     const sbmsInfo = [
       {
         id: '1F',
         name: '1F',
         url: `${baseUrl}/yingtaidasha_B1_0.sbm`,
-        mapsUrl
       },
       {
         id: '1F',
         name: '1F',
         url: `${baseUrl}/yingtaidasha_1F_1.sbm`,
-        mapsUrl
       },
       {
         id: '2F',
         name: '2F',
         url: `${baseUrl}/yingtaidasha_2F_2.sbm`,
-        mapsUrl
       },
       {
         id: '3F',
         name: '3F',
         url: `${baseUrl}/yingtaidasha_3F_3.sbm`,
-        mapsUrl
       },
       {
         id: '4F',
         name: '4F',
         url: `${baseUrl}/yingtaidasha_4F_4.sbm`,
-        mapsUrl
       },
       {
         id: '5F',
         name: '5F',
         url: `${baseUrl}/yingtaidasha_5F_5.sbm`,
-        mapsUrl
       },
       {
         id: '6F',
         name: '6F',
         url: `${baseUrl}/yingtaidasha_6F_6.sbm`,
-        mapsUrl
       },
       {
         id: '7F',
         name: '7F',
         url: `${baseUrl}/yingtaidasha_7F_7.sbm`,
-        mapsUrl
       }
       // ...
     ]
 
     ssp.loadSbm(sbmsInfo)
-
       .then(group => {
-
-        modelLoaded = true
-
         ssp.flyMainViewpoint()
-
       })
+
 
     const gui = new GUI({
       el: '#view'
     })
 
+    let spotLight = null
+
     gui.addButton({
-      text: '添加点光源:',
+      text: '添加点光源',
       onClick() {
         // 隐藏这俩个光源是为了突出显示点光源，实际项目中不需要
         ssp.getLightById('defaultAmbientLight').visible = false
         ssp.getLightById('defaultDirectionalLight').visible = false
 
-        ssp.createSpotLight({
+        spotLight = ssp.createSpotLight({
           id: 'spotLight',
           color: '#fff',
           position: {
@@ -126,42 +110,34 @@
     gui.addColor({
       label: '点光源:',
       value: 'red',
-      onChange(e) {
-        if (!modelLoaded) return alert('模型未加载完成，请稍后！！！')
-        ssp.getLightById("spotLight").color.set(e.target.value)
+      onInput(e) {
+        spotLight.color.set(e.target.value)
       }
     })
 
-    let spotLightPostionTransform = null
+    let spotLightTransform = null
 
     gui.addButton({
       text: '修改光源位置',
       onClick(e) {
-        if (!spotLightPostionTransform) {
-
-          spotLightPostionTransform = ssp.createTransform('spotLightPostion', {
-            object: ssp.getLightById("spotLight")
+        if (!spotLightTransform) {
+          spotLightTransform = ssp.createTransform('spotLightPostion', {
+            object: spotLight
           })
-
         } else {
-
-          spotLightPostionTransform.close()
-          spotLightPostionTransform = null
-
+          spotLightTransform.close()
+          spotLightTransform = null
         }
-
       }
     })
-
 
     gui.addInput({
       label: '照射x轴位置',
       value: 1000,
       onInput(e) {
         ssp.nextRender(() => {
-          const { target } = ssp.getLightById("spotLight")
-          target.position.setX(Number(e.target.value))
-          target.updateMatrixWorld()
+          spotLight.target.position.setX(Number(e.target.value))
+          spotLight.target.updateMatrixWorld()
         })
       }
     })
@@ -171,9 +147,8 @@
       value: 0,
       onInput(e) {
         ssp.nextRender(() => {
-          const { target } = ssp.getLightById("spotLight")
-          target.position.setY(Number(e.target.value))
-          target.updateMatrixWorld()
+          spotLight.target.position.setY(Number(e.target.value))
+          spotLight.target.updateMatrixWorld()
         })
       }
     })
@@ -183,9 +158,8 @@
       value: 1000,
       onInput(e) {
         ssp.nextRender(() => {
-          const { target } = ssp.getLightById("spotLight")
-          target.position.setZ(Number(e.target.value))
-          target.updateMatrixWorld()
+          spotLight.target.position.setZ(Number(e.target.value))
+          spotLight.target.updateMatrixWorld()
         })
       }
     })

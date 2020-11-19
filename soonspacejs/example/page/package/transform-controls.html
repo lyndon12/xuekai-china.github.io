@@ -11,17 +11,18 @@
 
 <body>
   <div id="view"></div>
+
   <script src="../../sdk/index.js"></script>
   <script src="../../../package/soon-gui/index.js"></script>
+  <script src="../../sdk/transform-controls.js"></script>
   <script>
 
-    let transform
+    let transformControls
     let model
 
     const ssp = new SoonSpace({
       el: '#view',
       option: {
-        backgroundColor: 0x333300
       },
       events: {
         modelClick(param) {
@@ -34,22 +35,19 @@
 
           })
 
-          if (transform) {
-            transform.close()
-            transform = null
-          }
+          transformControls.close()
 
-          transform = ssp.transformModel({
+          transformControls.start({
             object: model,
             mode: 'rotate',
             onUpdate: object => console.log(object)
           })
 
-          console.log(transform)
-
         }
       }
     })
+
+    transformControls = ssp.install(TransformControls)
 
     const gui = new GUI({
       el: '#view'
@@ -58,24 +56,24 @@
     gui.addButton({
       text: '移动',
       onClick() {
-        if (!transform) return alert('请先点击选择模型')
-        transform.changeMode('translate')
+        if (!transformControls) return alert('请先点击选择模型')
+        transformControls.changeMode('translate')
       }
     })
 
     gui.addButton({
       text: '旋转',
       onClick() {
-        if (!transform) return alert('请先点击选择模型')
-        transform.changeMode('rotate')
+        if (!transformControls) return alert('请先点击选择模型')
+        transformControls.changeMode('rotate')
       }
     })
 
     gui.addButton({
       text: '缩放',
       onClick() {
-        if (!transform) return alert('请先点击选择模型')
-        transform.changeMode('scale')
+        if (!transformControls) return alert('请先点击选择模型')
+        transformControls.changeMode('scale')
       }
     })
 
@@ -83,11 +81,10 @@
       text: '关闭操作',
       onClick() {
 
-        if (transform) transform.close()
-
+        transformControls.close()
         ssp.unOpacityShow()
 
-        transform = null
+        transformControls = null
         model = null
 
       }

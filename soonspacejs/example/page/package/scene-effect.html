@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SoonSpace Example</title>
+  <link rel="stylesheet" href="../../asstes/css/base.css">
+</head>
+
+<body>
+  <div id="view"></div>
+
+  <script src="../../sdk/index.js"></script>
+  <script src="../../../package/soon-gui/index.js"></script>
+  <script src="../../sdk/scene-effect.js"></script>
+  <script>
+
+    const ssp = new SoonSpace({
+      el: '#view',
+      option: {
+        background: {
+          color: '#000000'
+        }
+      },
+      events: {
+      }
+    })
+
+    const SceneEffect = ssp.install(sceneEffect)
+    SceneEffect.createWaves()
+    SceneEffect.createBuilds()
+
+    const gui = new GUI({
+      el: '#view'
+    })
+
+    gui.addSelect({
+      label: '天空风格',
+      options: [
+        {
+          label: '晴天',
+          value: 'sunny'
+        },
+        {
+          label: '下雨',
+          value: 'rainy'
+        },
+        {
+          label: '下雪',
+          value: 'snowy'
+        }
+      ],
+      onChange(e) {
+        switch (e.target.value) {
+          case 'sunny':
+            SceneEffect.initSunny()
+            break
+          case 'rainy':
+            SceneEffect.initRainy()
+            break
+          case 'snowy':
+            SceneEffect.initSnow()
+            break
+        }
+      }
+    })
+
+  </script>
+</body>
+
+</html>

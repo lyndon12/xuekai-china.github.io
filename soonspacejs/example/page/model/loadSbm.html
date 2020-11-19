@@ -18,8 +18,9 @@
   <script src="../../lib/antd-vue/antd.min.js"></script>
   <script src="../../sdk/index.js"></script>
   <script src="../../../package/soon-gui/index.js"></script>
+  <!-- <script src="https://unpkg.com/vconsole@3.3.4/dist/vconsole.min.js"></script> -->
   <script>
-
+    // var vConsole = new VConsole();
     const vm = new Vue({
       el: '#app',
       template:
@@ -71,7 +72,7 @@
         }
       },
       events: {
-        modelClick(e){
+        modelClick(e) {
           console.log(e)
         },
         selectPosition(p) {
@@ -165,7 +166,7 @@
         vm.loading = false
 
         ssp.viewport.controls.enableOutOfScene = false
-
+        ssp.viewport.controls.unOffsetOfScene = 1;
       })
       .catch(err => {
         console.error(err)
@@ -249,6 +250,7 @@
           ssp.hideAllSbm()
 
           const floor = ssp.getSbmById(e.target.value)
+          ssp.viewport.controls.enableOutOfScene = false
 
           if (floor) {
             floor.show()

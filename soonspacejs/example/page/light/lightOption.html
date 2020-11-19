@@ -18,81 +18,62 @@
 
   <script>
 
-    let modelLoaded = false
-
     let ssp = new SoonSpace({
       el: '#view',
       option: {
-        backgroundColor: 0x333300,
         showGrid: false
       },
       events: {}
     })
 
-    ssp.setSkyBackground('../../asstes/img/skybox/sunny/', ['px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'pz.jpg', 'nz.jpg']);
-
     const baseUrl = '../../asstes/model/sbm/yingtaidasha'
-    const mapsUrl = `${baseUrl}/Maps/`
     const sbmsInfo = [
       {
         id: '1F',
         name: '1F',
         url: `${baseUrl}/yingtaidasha_B1_0.sbm`,
-        mapsUrl
       },
       {
         id: '1F',
         name: '1F',
         url: `${baseUrl}/yingtaidasha_1F_1.sbm`,
-        mapsUrl
       },
       {
         id: '2F',
         name: '2F',
         url: `${baseUrl}/yingtaidasha_2F_2.sbm`,
-        mapsUrl
       },
       {
         id: '3F',
         name: '3F',
         url: `${baseUrl}/yingtaidasha_3F_3.sbm`,
-        mapsUrl
       },
       {
         id: '4F',
         name: '4F',
         url: `${baseUrl}/yingtaidasha_4F_4.sbm`,
-        mapsUrl
       },
       {
         id: '5F',
         name: '5F',
         url: `${baseUrl}/yingtaidasha_5F_5.sbm`,
-        mapsUrl
       },
       {
         id: '6F',
         name: '6F',
         url: `${baseUrl}/yingtaidasha_6F_6.sbm`,
-        mapsUrl
       },
       {
         id: '7F',
         name: '7F',
         url: `${baseUrl}/yingtaidasha_7F_7.sbm`,
-        mapsUrl
       }
       // ...
     ]
 
     ssp.loadSbm(sbmsInfo)
-
       .then(group => {
-
-        modelLoaded = true
-
         ssp.flyMainViewpoint()
-
       })
 
     const gui = new GUI({
@@ -102,58 +83,31 @@
     gui.addColor({
       label: '环境光:',
       onChange(e) {
-        if (!modelLoaded) return alert('模型未加载完成，请稍后！！！')
         ssp.getLightById('defaultAmbientLight').color.set(e.target.value)
       }
     })
 
-    let defaultAmbientLightPostionTransform = null
-
-    gui.addButton({
-      text: '修改环境光位置',
-      onClick(e) {
-        if (!defaultAmbientLightPostionTransform) {
-
-          defaultAmbientLightPostionTransform = ssp.createTransform('defaultAmbientLight', {
-            object: ssp.getLightById("defaultAmbientLight")
-          })
-
-        } else {
-
-          defaultAmbientLightPostionTransform.close()
-          defaultAmbientLightPostionTransform = null
-
-        }
-
-      }
-    })
 
     gui.addColor({
       label: '平行光:',
       onChange(e) {
-        if (!modelLoaded) return alert('模型未加载完成，请稍后！！！')
         ssp.getLightById('defaultDirectionalLight').color.set(e.target.value)
       }
     })
 
-    let defaultDirectionalLightPostionTransform = null
+    let defaultDirectionalLightTransform = null
 
     gui.addButton({
       text: '修改平行光位置',
       onClick(e) {
-        if (!defaultDirectionalLightPostionTransform) {
-
-          defaultDirectionalLightPostionTransform = ssp.createTransform('defaultDirectionalLight', {
+        if (!defaultDirectionalLightTransform) {
+          defaultDirectionalLightTransform = ssp.createTransform('defaultDirectionalLight', {
             object: ssp.getLightById("defaultDirectionalLight")
           })
-
         } else {
-
-          defaultDirectionalLightPostionTransform.close()
-          defaultDirectionalLightPostionTransform = null
-
+          defaultDirectionalLightTransform.close()
+          defaultDirectionalLightTransform = null
         }
-
       }
     })
 

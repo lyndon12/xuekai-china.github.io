@@ -44,7 +44,7 @@
     gui.addButton({
       text: '加载路径',
       onClick() {
-        ssp.loadGml({ id: 'gml' }, '../../asstes/model/sbm/hzl/hzl.gml')
+        ssp.loadGml({ id: 'gml', visible: false }, '../../asstes/model/sbm/hzl/hzl.gml')
           .then(group => {
             pathGroup = group
             shortestPathBtn.parentNode.show()
@@ -72,8 +72,7 @@
               z: 5257
             }
           },
-          restrict: null,
-          color: 0xff0000
+          imgUrl: '../../asstes/img/topology/1.png'
         })
 
         if (shortestPath) autoPatrolBtn.parentNode.show()
@@ -93,8 +92,9 @@
           mode: 'firstPerson',
           lookAtY: 50,
           path: shortestPath,
-          naviSpeed: 1,
+          naviSpeed: 2,
           eyeHeight: 100,
+          onUpdate: (e, nextPoints) => { console.log(e, nextPoints) },
           onEnd: () => console.log('onEnd')
         })
 
@@ -117,6 +117,7 @@
         } else {
 
           patrolControls.pause()
+          ssp.flyToObj(pathGroup)
           pauseBtn.innerHTML = '继续'
 
         }

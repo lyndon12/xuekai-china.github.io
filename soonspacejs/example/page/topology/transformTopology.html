@@ -11,12 +11,13 @@
 
 <body>
   <div id="view"></div>
+
   <script src="../../sdk/index.js"></script>
   <script src="../../../package/soon-gui/index.js"></script>
-
+  <script src="../../sdk/transform-controls.js"></script>
   <script>
 
-    let gmlObj, transform;
+    let gmlObj, transformControls;
 
     const ssp = new SoonSpace({
       el: '#view',
@@ -25,6 +26,8 @@
       },
       events: {}
     })
+
+    transformControls = ssp.install(TransformControls)
 
     ssp.loadXml({ id: 'hzl' }, '../../asstes/model/sbm/hzl/hzl.xml')
 
@@ -37,7 +40,7 @@
 
       })
       .then(() => {
-        transform = ssp.createTransform('gmlTransform', {
+         transformControls.start({
           object: gmlObj,
           mode: 'translate',
         })
@@ -50,21 +53,21 @@
     gui.addButton({
       text: '移动',
       onClick() {
-        transform.changeMode('translate')
+        transformControls.changeMode('translate')
       }
     })
 
     gui.addButton({
       text: '旋转',
       onClick() {
-        transform.changeMode('rotate')
+        transformControls.changeMode('rotate')
       }
     })
 
     gui.addButton({
       text: '缩放',
       onClick() {
-        transform.changeMode('scale')
+        transformControls.changeMode('scale')
       }
     })
 

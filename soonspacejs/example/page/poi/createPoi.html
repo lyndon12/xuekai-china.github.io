@@ -16,7 +16,6 @@
     const ssp = new SoonSpace({
       el: '#view',
       option: {
-        backgroundColor: 0x333300,
         showGrid: true,
         showInfo: false
       },
@@ -34,6 +33,10 @@
         x: 0,
         y: 10,
         z: 0
+      },
+      level: {
+        max: 5000,
+        min: 10
       },
       scale: {
         width: 5,
@@ -61,6 +64,8 @@
     });
 
     console.log('createPoi', poi)
+
+    ssp.flyToObj(poi)
 
     /**
      * createPoiToGroup

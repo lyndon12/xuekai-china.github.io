@@ -28,9 +28,9 @@
       id: 'flame',
       texturePath: '../../asstes/img/effect/flame.png',
       scale: {
-        x: 100,
-        y: 100,
-        z: 100
+        x: 300,
+        y: 300,
+        z: 300
       },
       position: {
         x: 1000,
@@ -43,18 +43,12 @@
     ssp.flyToObj(flame)
 
     const baseUrl = '../../asstes/model/sbm/yingtaidasha'
-    const mapsUrl = `${baseUrl}/Maps/`
     const sbmsInfo = [
       {
         id: 'B1_0',
         name: 'B1',
         url: `${baseUrl}/yingtaidasha_B1_0.sbm`,
-        mapsUrl,
-        position: { x: 0, y: 0, z: 0 },
-        userData: {
-          modelCode: 'njnkjnkjnjdnkjnkjnm'
-        }
-      },
+      }
     ]
 
     /**
@@ -73,6 +67,13 @@
       step: 0.01,
       onInput(e) {
         flame.magnitude = e.target.value
+      }
+    })
+
+    gui.addButton({
+      text: '清楚火🔥',
+      onClick(e) {
+        ssp.removeEffectById('flame')
       }
     })
 
