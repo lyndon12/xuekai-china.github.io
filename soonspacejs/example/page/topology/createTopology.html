@@ -14,6 +14,7 @@
 
   <script src="../../sdk/index.js"></script>
   <script src="../../../package/soon-gui/index.js"></script>
+  <script src="../../sdk/PatrolControls.js"></script>
 
   <script>
 
@@ -37,8 +38,10 @@
     const pointColors = [0xff0000, 0x00ff00, 0x0000ff]
     const topologyColors = [0x0000ff, 0xff0000, 0x00ff00]
 
+    const patrolControls = ssp.install(PatrolControls)
+
     gui.addButton({
-      text: '创建拓扑路径',
+      text: '创建路径且巡检',
       onClick() {
 
         const group = ssp.createTopologyToGroup(
@@ -49,29 +52,38 @@
             {
               x: 0,
               y: 10,
-              z: 0,
+              z: 2000,
             },
             {
               x: 0,
               y: 10,
-              z: 1500,
+              z: 3000,
             },
             {
-              x: 1500,
+              x: 0,
               y: 10,
-              z: 1500,
+              z: 4000,
             },
             {
-              x: 1500,
+              x: 0,
               y: 10,
-              z: 0,
+              z: 5000,
             },
           ],
-          {
-            pointColors,
-            topologyColors
-          }
+          // {
+          //   pointColors,
+          //   topologyColors
+          // }
         )
+
+        patrolControls.start({
+          lookAtY: 50,
+          path: group,
+          naviSpeed: 1,
+          eyeHeight: 100,
+          onUpdate: (e, nextPoints) => { console.log(e, nextPoints) },
+          onEnd: () => patrolControls.stop()
+        })
 
         ssp.flyToObj(group)
 

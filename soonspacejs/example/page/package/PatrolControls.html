@@ -25,7 +25,11 @@
       option: {
         showInfo: true
       },
-      events: {}
+      events: {
+        selectPosition(position) {
+          console.log(position)
+        }
+      }
     })
 
     ssp.loadXml({ id: 'xml' }, '../../asstes/model/sbm/hzl/hzl.xml')
@@ -81,21 +85,33 @@
       }
     })
 
+    const pausePoints = [
+      { x: 2270.7688578745106, y: 15.213907337192069, z: 886.6688348806723 }
+    ]
+
     const autoPatrolBtn = gui.addButton({
       text: '开始导航',
       style: {
         display: 'none'
       },
       onClick() {
-
         patrolControls.start({
-          mode: 'firstPerson',
           lookAtY: 50,
           path: shortestPath,
-          naviSpeed: 2,
+          naviSpeed: 1,
           eyeHeight: 100,
-          onUpdate: (e, nextPoints) => { console.log(e, nextPoints) },
-          onEnd: () => console.log('onEnd')
+          onUpdate: (currPosition, nextPoints) => {
+            for (let i = 0; i < pausePoints.length; i++) {
+              if (currPosition.distanceTo(pausePoints[i]) <= 100) {
+                patrolControls.pause()
+                pauseBtn.innerHTML = '继续'
+                pausePoints.splice(i, 1)
+              }
+            }
+          },
+          onEnd: () => {
+            console.log('巡检结束！')
+          }
         })
 
         pauseBtn.parentNode.show()
@@ -117,7 +133,6 @@
         } else {
 
           patrolControls.pause()
-          ssp.flyToObj(pathGroup)
           pauseBtn.innerHTML = '继续'
 
         }

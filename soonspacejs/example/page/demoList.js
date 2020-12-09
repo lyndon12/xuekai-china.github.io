@@ -245,10 +245,6 @@ export default [
         title: "更多功能",
         demoLink: "./topology/moreFunc.html"
       },
-      {
-        title: "第三人称巡检",
-        demoLink: "./topology/thirdPersonAutoPatrol.html"
-      }
     ]
   },
   // animation
@@ -284,6 +280,10 @@ export default [
       {
         title: "热力图",
         demoLink: "./package/HeatMap.html"
+      },
+      {
+        title: "场景特效",
+        demoLink: "./package/scene-effect.html"
       },
       {
         title: "巡检控制器",

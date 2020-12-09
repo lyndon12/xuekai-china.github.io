@@ -53,11 +53,13 @@
     gui.addButton({
       text: '创建 2D PoiNode',
       onClick() {
+
         const poi2DEl = el.cloneNode(true)
-        poi2DEl.style.display = 'flex'
+        poi2DEl.style.display = 'block'
         poi2DEl.onclick = function () {
           alert('2D PoiNode click')
         }
+        
         ssp.createPoiNodeToGroup({
           id: '1111111'
         }, {
@@ -80,11 +82,13 @@
     gui.addButton({
       text: '创建 2.5D PoiNode',
       onClick() {
+
         const poi2_5DEl = el.cloneNode(true)
-        poi2_5DEl.style.display = 'flex'
+        poi2_5DEl.style.display = 'block'
         poi2_5DEl.onclick = function () {
           alert('2.5D PoiNode click')
         }
+
         ssp.createPoiNode({
           type: '2.5D',
           id: '2.5DPoiNode',
@@ -128,11 +132,13 @@
     gui.addButton({
       text: '创建 3D PoiNode',
       onClick() {
+
         const poi3DEl = el.cloneNode(true)
-        poi3DEl.style.display = 'flex'
+        poi3DEl.style.display = 'block'
         poi3DEl.onclick = function () {
           alert('3D PoiNode click')
         }
+
         ssp.createPoiNode({
           type: '3D',
           id: '3DPoiNode',

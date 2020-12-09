@@ -10,12 +10,15 @@
 </head>
 
 <body>
-  <div id="view"></div>
+  <div id="view" style="top: 50px;"></div>
 
   <script src="../../sdk/index.js"></script>
   <script src="../../../package/soon-gui/index.js"></script>
+  <script src="https://unpkg.com/vconsole@3.3.4/dist/vconsole.min.js"></script>
 
   <script>
+
+    var vConsole = new VConsole();
 
     const ssp = new SoonSpace({
       el: '#view',

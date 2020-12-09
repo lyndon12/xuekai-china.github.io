@@ -36,7 +36,10 @@
 
           } else if (mode === 'edge') {
 
-            ssp.edgeShow(model, { color: 0xff0000 })
+            ssp.edgeShow(model, {
+              color: '#fff',
+              hideColor: '#ff0000'
+            })
 
           } else if (mode === 'emissive') {
 
@@ -132,7 +135,7 @@
           value: 'emissive'
         },
         {
-          label: '透明',
+          label: '轮廓',
           value: 'edge'
         },
       ],

@@ -28,24 +28,14 @@
 
     ssp.loadXml(
       {
-        id: 'firstSbmGroup',
-        name: 'name_firstSbmGroup',
-        // level: {
-        //   max: 70000,
-        //   min: 500
-        // },
-        position: {
-          x: 100000,
-          y: 10000,
-          z: 100000
-        }
+        id: 'firstSbmGroup'
       },
-      xmlUrl
+      xmlUrl,
+      progress => console.log(progress)
     )
       .then(group => {
 
         console.log(group)
-
         ssp.flyMainViewpoint('leftTop')
 
       })
