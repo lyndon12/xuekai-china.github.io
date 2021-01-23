@@ -50,6 +50,9 @@
     ]
 
     ssp.loadSbm(sbmsInfo)
+      .then(() => {
+        ssp.flyMainViewpoint()
+      })
 
     const gui = new GUI({
       text: '#view'

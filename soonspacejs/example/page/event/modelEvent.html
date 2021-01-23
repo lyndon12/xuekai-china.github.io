@@ -10,7 +10,7 @@
 </head>
 
 <body>
-  <div id="view" style="top: 50px;"></div>
+  <div id="view"></div>
 
   <script src="../../sdk/index.js"></script>
   <script src="../../../package/soon-gui/index.js"></script>
@@ -18,13 +18,13 @@
 
   <script>
 
-    var vConsole = new VConsole();
+    // var vConsole = new VConsole();
 
     const ssp = new SoonSpace({
       el: '#view',
       option: {
-        showInfo: true,
-        hoverEnabled: false
+        showInfo: false,
+        hoverEnabled: true
       },
       events: {
         modelClick(param) {
@@ -43,6 +43,12 @@
 
           console.log('Global modelDblClick event', param)
           alert('Global modelDblClick event')
+
+        },
+        modelHover(param) {
+
+          console.log('Global modelHover event', param)
+          alert('Global modelHover event')
 
         },
         selectPosition(position) {
@@ -71,13 +77,10 @@
 
     // 样例模型服务地址
     const baseUrl = '../../asstes/model/sbm/yingtaidasha'
-    const mapsUrl = `${baseUrl}/Maps/`
-
     const sbmsInfo = {
       id: 'B1',
       name: 'B1',
       url: `${baseUrl}/yingtaidasha_B1_0.sbm`,
-      mapsUrl,
       position: { x: 1000, y: 0, z: 1000 },
       onClick() {
 

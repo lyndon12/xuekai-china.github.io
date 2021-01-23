@@ -46,17 +46,25 @@ export default [
     key: "modelTool",
     children: [
       {
-        title: "模型跟随鼠标",
-        demoLink: "./modelTool/followMouse.html"
+        title: "选中模型",
+        demoLink: "./modelTool/selectModel.html"
+      },
+      {
+        title: "模型爆炸",
+        demoLink: "./modelTool/blastModel.html"
+      },
+      {
+        title: "模型切割",
+        demoLink: "./modelTool/modelClipping.html"
       },
       {
         title: "复制模型",
         demoLink: "./modelTool/copyModel.html"
       },
       {
-        title: "模型爆炸",
-        demoLink: "./modelTool/blastModel.html"
-      }
+        title: "模型跟随鼠标",
+        demoLink: "./modelTool/followMouse.html"
+      },
     ]
   },
   // poi
@@ -150,10 +158,6 @@ export default [
     key: "sceneTool",
     children: [
       {
-        title: "选中模型",
-        demoLink: "./sceneTool/selectModel.html"
-      },
-      {
         title: "创建地面",
         demoLink: "./sceneTool/createGround.html"
       },
@@ -162,12 +166,12 @@ export default [
         demoLink: "./sceneTool/2DMode.html"
       },
       {
-        title: "雾化",
+        title: "场景雾化",
         demoLink: "./sceneTool/fog.html"
       },
       {
-        title: "切割",
-        demoLink: "./sceneTool/clipping.html"
+        title: "场景切割",
+        demoLink: "./sceneTool/sceneClipping.html"
       },
       {
         title: "测量",
@@ -199,7 +203,7 @@ export default [
       },
       {
         title: "相机跟随",
-        demoLink: "./camera/CameraFollower.html"
+        demoLink: "./camera/cameraFollower.html"
       },
       {
         title: "第一人称",
@@ -240,11 +244,7 @@ export default [
       {
         title: "操控 topology 路径",
         demoLink: "./topology/transformTopology.html"
-      },
-      {
-        title: "更多功能",
-        demoLink: "./topology/moreFunc.html"
-      },
+      }
     ]
   },
   // animation
@@ -256,6 +256,10 @@ export default [
       {
         title: "创建动画",
         demoLink: "./animation/createAnimation.html"
+      },
+      {
+        title: "卷帘门升降",
+        demoLink: "./animation/juanlianmen.html"
       },
     ]
   },
@@ -287,7 +291,7 @@ export default [
       },
       {
         title: "巡检控制器",
-        demoLink: "./package/PatrolControls.html"
+        demoLink: "./package/patrol-controls.html"
       },
       {
         title: "操控模型",

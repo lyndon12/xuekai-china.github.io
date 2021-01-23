@@ -10,7 +10,7 @@ function GUI( option ) {
   this._setStyle( GUI_El, {
     maxHeight: '100%',
     position: 'absolute',
-    padding: '4px 24px',
+    padding: '12px',
     backgroundColor: 'rgba(0, 0, 0, 0.3)',
     top: 0,
     right: 0,
@@ -62,7 +62,8 @@ GUI.prototype.addButton = function ( option ) {
   const row = this._addEle( {
     tag: 'div',
     style: Object.assign( {
-      margin: '12px 0'
+      margin: '6px',
+      textAlign: 'right'
     }, style )
   } )
 
@@ -88,7 +89,7 @@ GUI.prototype.addInput = function ( option ) {
   const row = this._addEle( {
     tag: 'div',
     style: {
-      margin: '12px 0'
+      margin: '6px'
     }
   } )
 
@@ -117,7 +118,7 @@ GUI.prototype.addColor = function ( option ) {
   const row = this._addEle( {
     tag: 'div',
     style: {
-      margin: '12px 0'
+      margin: '6px',
     }
   } )
 
@@ -145,7 +146,7 @@ GUI.prototype.addCheckBox = function ( option ) {
   const row = this._addEle( {
     tag: 'div',
     style: {
-      margin: '12px 0'
+      margin: '6px',
     }
   } )
 
@@ -174,7 +175,7 @@ GUI.prototype.addRange = function ( option ) {
   const row = this._addEle( {
     tag: 'div',
     style: {
-      margin: '12px 0'
+      margin: '6px',
     }
   } )
 
@@ -261,7 +262,7 @@ GUI.prototype._addRow = function () {
   const row = this._addEle( {
     tag: 'div',
     style: {
-      margin: '12px 0'
+      margin: '6px',
     }
   } )
 
@@ -279,7 +280,6 @@ GUI.prototype._addLabel = function ( option ) {
     style: {
       paddingRight: '8px',
       color: '#ccc',
-      minWidth: '100px',
       display: "inline-block",
       textAlign: 'right'
     }

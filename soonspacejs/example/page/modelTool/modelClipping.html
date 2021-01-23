@@ -11,8 +11,7 @@
 
 <body>
   <div id="view"></div>
-  <span id="span-volume"
-    style="position: absolute;color: white; font-size: 32px; background-color: rgba(0, 0, 0, 0.25); padding: 4px 24px;">淹没体积</span>
+
   <script src="../../sdk/index.js"></script>
   <script src="../../../package/soon-gui/index.js"></script>
 
@@ -20,13 +19,11 @@
 
     const ssp = new SoonSpace({
       el: '#view',
-      option: {
-      },
+      option: {},
       events: {}
     })
 
     const THREE = ssp.viewport.THREE
-    const span = document.getElementById('span-volume')
 
     const baseUrl = '../../asstes/model/sbm/xinglongzhan'
     const mapsUrl = `${baseUrl}/Maps/`
@@ -67,9 +64,9 @@
 
         plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), -3000)
         const help = new THREE.PlaneHelper(plane, 50000, 'rgb(42, 87, 166)')
-        ssp.manager.helperManager.scene.add(help)
+        ssp.addObject(help, ssp.manager.helperManager.scene)
 
-        ssp.opacityShow(model2, { color: 'rgb(42, 87, 166)', opacity: 0.5 })
+        ssp.opacityShow(model2, { color: 'rgb(42, 87, 166)', opacity: 1 })
 
         ssp.modelClipping(model1, {
           axis: 'y',
@@ -82,84 +79,12 @@
           position: 3000
         })
 
-        let size = (getBoxSize(model2) / 100000).toFixed(2)
-        size = size < 10 ? 0 : size
-        span.textContent = '淹没体积：' + size + 'm³'
-      })
 
-    let clipPlanes = ssp.viewport.renderer.clippingPlanes;
+      })
 
     const gui = new GUI({
       el: '#view'
     })
-
-    const getNearestDis = (dis, p1, p2) => {
-      let d1 = Math.abs(dis - p1)
-      let d2 = Math.abs(dis - p2)
-
-      if (d1 < d2) {
-        return p1
-      }
-      else {
-        return p2
-      }
-    }
-
-    const checkNum = (num) => {
-      let res = Number(num)
-      if (!isNaN(res)) {
-        return res
-      }
-      else {
-        let arr = num.split('-')
-        return Number(arr[1] * -1)
-      }
-    }
-
-    const getMeshBoxSize = (mesh) => {
-
-      if (!mesh.material.clippingPlanes) return 0
-
-      const clipPlanes = mesh.material.clippingPlanes
-      const box = new THREE.Box3().expandByObject(mesh)
-      const point = new THREE.Vector3(0, 0, 0)
-
-      let y, isInterY;
-
-      isInterY = clipPlanes[0].intersectsBox(box)
-
-      if (isInterY) {
-        y = clipPlanes[0].distanceToPoint(point)
-        y = checkNum(y)
-
-      } else {
-        //裁切后没有物体残留
-        y = clipPlanes[0].distanceToPoint(point)
-        y = checkNum(y)
-        y = getNearestDis(y, box.min.y, box.max.y)
-      }
-
-      return (box.max.x - box.min.x) * (y - box.min.y) * box.max.z - box.min.z
-
-    }
-
-    function getBoxSize(model) {
-
-      let resNum = 0
-
-      model.traverse && model.traverse(child => {
-
-        if (child.isMesh) {
-
-          resNum += getMeshBoxSize(child)
-
-        }
-
-      })
-
-      return resNum
-
-    }
 
     gui.addRange({
       label: '淹没高度:',
@@ -184,9 +109,6 @@
           position: Number(e.target.value)
         })
 
-        let size = (getBoxSize(model2) / 100000).toFixed(2)
-        size = size < 10 ? 0 : size
-        span.textContent = '淹没体积：' + size + 'm³'
       }
     })
 

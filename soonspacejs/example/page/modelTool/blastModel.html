@@ -31,18 +31,17 @@
       id: 'B1_0',
       name: 'B1',
       url: `${baseUrl}/yingtaidasha_B1_0.sbm`,
-      userData: {
-        modelCode: 'njnkjnkjnjdnkjnkjnm'
+      position: {
+        x: 100000,
+        y: 100000,
+        z: 100000
       }
     }
 
     ssp.loadSbm(sbmsInfo)
       .then(res => {
-
         ssp.flyToObj(res)
-
         model = res
-
       })
 
     const gui = new GUI({
@@ -64,6 +63,17 @@
       onClick() {
         ssp.closeBlastModel()
         range.value = 0
+      }
+    })
+
+    let boom = false
+
+    const boomModelBtn = gui.addButton({
+      text: '模型分裂排序',
+      onClick() {
+        boom = !boom
+        boomModelBtn.innerHTML = boom ? '关闭模型分裂排序' : '模型分裂排序'
+        ssp.boomModel2([model], 2000, 10000, boom, true, o => console.log(o))
       }
     })
 

@@ -14,7 +14,7 @@
 
   <script src="../../sdk/index.js"></script>
   <script src="../../../package/soon-gui/index.js"></script>
-  <script src="../../sdk/PatrolControls.js"></script>
+  <script src="../../sdk/patrol-controls.js"></script>
 
   <script>
 
@@ -23,7 +23,11 @@
       option: {
         showGrid: true
       },
-      events: {}
+      events: {
+        selectPosition(pos) {
+          console.log(pos)
+        }
+      }
     })
 
     ssp.loadXml({ id: 'hzl' }, '../../asstes/model/sbm/hzl/hzl.xml')
@@ -41,7 +45,7 @@
     const patrolControls = ssp.install(PatrolControls)
 
     gui.addButton({
-      text: '创建路径且巡检',
+      text: '创建动态路径',
       onClick() {
 
         const group = ssp.createTopologyToGroup(
@@ -52,40 +56,52 @@
             {
               x: 0,
               y: 10,
-              z: 2000,
+              z: 4000,
             },
             {
               x: 0,
               y: 10,
-              z: 3000,
+              z: 6000,
             },
             {
-              x: 0,
+              x: 1000,
+              y: 10,
+              z: 6000,
+            },
+            {
+              x: 1000,
               y: 10,
               z: 4000,
             },
             {
               x: 0,
               y: 10,
-              z: 5000,
+              z: 4000,
             },
           ],
-          // {
-          //   pointColors,
-          //   topologyColors
-          // }
+          {
+            // 指向箭头的图片路径
+            imgUrl: '../../asstes/img/topology/1.png',
+            // 路径宽度（节点和管道的直径）
+            lineWidth: 50,
+            // 节点显示
+            pointVisible: false,
+            // 节点颜色
+            pointColors: ['red'],
+            // 管道显示
+            pipeVisible: false,
+            // 管道颜色
+            pipeColor: 0x00ff00,
+            // 管道不透明度
+            pipeOpacity: 0.3,
+            // 箭头动画
+            animation: true,
+            // 没有图片时纯色路径的颜色
+            topologyColors: ['red', 'green']
+          }
         )
 
-        patrolControls.start({
-          lookAtY: 50,
-          path: group,
-          naviSpeed: 1,
-          eyeHeight: 100,
-          onUpdate: (e, nextPoints) => { console.log(e, nextPoints) },
-          onEnd: () => patrolControls.stop()
-        })
-
-        ssp.flyToObj(group)
+        ssp.flyToObj(group, 'top')
 
       }
     })

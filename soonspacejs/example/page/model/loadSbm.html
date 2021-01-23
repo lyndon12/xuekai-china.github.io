@@ -15,15 +15,19 @@
 
   <script src="../../sdk/index.js"></script>
   <script src="../../../package/soon-gui/index.js"></script>
+  <script src="https://unpkg.com/vconsole@3.3.4/dist/vconsole.min.js"></script>
 
   <script>
-    
+
+    // new VConsole()
+
     const ssp = new SoonSpace({
       el: '#view',
       option: {
         showInfo: true,
         showGrid: false,
-        closeWarnLog: true
+        closeWarnLog: true,
+        asyncLoad: false
       },
       events: {
         modelClick(e) {
@@ -106,15 +110,38 @@
       // ...
     ]
 
+    ssp.setCameraViewpoint({
+      position: { x: 2332.0607500149817, y: 12777.276231091362, z: 6354.487868907632 },
+      rotation: { x: -0.8175943986674413, y: -0.06422302376505105, z: -0.06834391949421785 }
+    })
+
+    ssp.viewport.controls.setState({
+      // 缩放速度
+      zoomSpeed: 2,
+      // 最小缩放距离
+      zoomMinDistance: 500,
+      // 最大缩放距离
+      zoomMaxDistance: 20000,
+      // pc 端相机距离碰撞面的最小距离
+      zoomMinDistanceToMesh: 500,
+      // 旋转速度
+      rotateSpeed: 1,
+      // 上下旋转角度范围限制
+      rotateTiltRange: {
+        max: Math.PI,
+        min: Math.PI / 2
+      }
+    })
+
     /**
      * 加载 sbm˝
      */
     ssp.loadSbm(
       sbmsInfo,
-      progress => console.log(progress)
+      // progress => console.log(progress)
     )
       .then(models => {
-        ssp.flyMainViewpoint()
+        // ssp.flyMainViewpoint()
       })
       .catch(err => {
         console.error(err)

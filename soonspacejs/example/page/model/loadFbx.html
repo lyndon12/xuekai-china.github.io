@@ -22,42 +22,56 @@
       option: {
         showInfo: true,
       },
-      events: {
-        modelClick(param) {
-          console.log(param)
-        }
-      }
+      events: {}
     })
 
-    let model = null
+    let model, model2
 
     ssp.loadModel({
-      id: 'firstGltfGroup',
+      id: 'firsFbxGroup',
       url: '../../asstes/model/Fbx/dt/DTdh.fbx',
-      position: { x: 0, y: 20, z: 0 },
+      position: { x: 0, y: 0, z: 40 },
       onClick() {
         console.log('model self click', this)
+      },
+      onLoad() {
+        console.log('onLoad', this)
       }
     })
       .then(fbx => {
         model = fbx
 
-        console.log(model)
-
         ssp.flyToObj(fbx, 'leftTop')
+
+        return ssp.cloneModel(model, {
+          id: 'firsFbxGroup2',
+          position: { x: 0, y: 0, z: 20 }
+        })
+      })
+      .then(fbx => {
+        console.log(fbx)
+        model2 = fbx
       })
 
-      const gui = new GUI({
-        el: '#view'
-      })
+    const gui = new GUI({
+      el: '#view'
+    })
 
-      gui.addCheckBox({
-        label: '模型动画',
-        onChange(e) {
-          if(e.target.checked)model.playAnimation()
-          else model.stopAnimation()
+    gui.addCheckBox({
+      label: '模型动画',
+      onChange(e) {
+        if (e.target.checked) {
+          const clipAction = model.playAnimation()
+          const clipAction2 = model2.playAnimation()
+
+          console.log(clipAction, clipAction2)
         }
-      })
+        else {
+          model.stopAnimation()
+          model2.stopAnimation()
+        }
+      }
+    })
 
   </script>
 </body>

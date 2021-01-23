@@ -20,13 +20,31 @@
       option: {
         showInfo: true
       },
-      events: {}
+      events: {
+        selectPosition(pos) {
+          console.log(pos)
+        }
+      }
     })
+
+    ssp.createPoi({
+      id: "icon1",
+      iconUrl: "../../asstes/img/poi/WechatIMG709.png",
+      position: {
+        x: 0,
+        y: 100,
+        z: 0
+      },
+      scale: {
+        width: 5,
+        height: 5
+      }
+    });
 
     const points = []
     let max = 0
     const width = 1024
-    const height = 512
+    const height = 1024
     let len = 500
 
     while (len--) {
@@ -47,8 +65,9 @@
       points: points
     }
 
-    const heatMap = ssp.install(HeatMap)
-    heatMap.createHeatMap({
+    ssp.install(HeatMap, 'heatMap')
+
+    ssp.$heatMap.createHeatMap({
       data: data,
       canvasStyle: {
         width,
@@ -60,10 +79,6 @@
         0.6: "yellow",
         0.8: "orange",
         1.0: "rgb(255,0,0)"
-      },
-      scale: {
-        x: 10,
-        y: 10
       }
     })
 

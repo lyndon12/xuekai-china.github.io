@@ -11,36 +11,26 @@
 
 <body>
   <div id="view"></div>
-
   <script src="../../sdk/index.js"></script>
   <script>
 
     const ssp = new SoonSpace({
       el: '#view',
       option: {
+        showInfo: true,
+        showGrid: true,
+        backgroundColor: 0x30030
       },
-      events: {
-      }
+      events: {}
     })
 
-    const ground = ssp.createGround({
-      imgUrl: '../../asstes/img/ground/004.jpg',
-      width: 500,
-      height: 500,
-      opacity: 0.6,
-      position: { x: 0, y: 0, z: 0 },
-      repeat: { width: 10, height: 10 }
-    })
+    const { THREE } = ssp.viewport
 
-    ssp.createPoi({
-      id: "icon1",
-      iconUrl: "../../asstes/img/poi/WechatIMG709.png",
-      position: {
-        x: 0,
-        y: 100,
-        z: 0
-      },
-    });
+    new THREE.OBJLoader().load('../../asstes/model/obj/cfxjl-模型/cfxjl-2组02.obj', (e) => {
+      console.log(e)
+      ssp.addObject(e, ssp.manager.modelManager.scene)
+      ssp.flyMainViewpoint()
+    })
 
   </script>
 </body>

@@ -39,7 +39,12 @@
         showGrid: true,
         showInfo: true
       },
-      events: {}
+      events: {
+        sceneClick() {
+          console.log('sceneClick')
+          alert('sceneClick')
+        }
+      }
     })
 
     ssp.flyMainViewpoint()
@@ -59,20 +64,19 @@
         poi2DEl.onclick = function () {
           alert('2D PoiNode click')
         }
-        
+        poi2DEl.ontouchend = function () {
+          alert('2D PoiNode click')
+        }
+
         ssp.createPoiNodeToGroup({
           id: '1111111'
         }, {
           type: '2D',
           id: '2DPoiNode',
-          level: {
-            max: 5000,
-            min: 300
-          },
           position: {
-            x: 200,
-            y: 40,
-            z: 200
+            x: -1000,
+            y: 0,
+            z: 0
           },
           element: poi2DEl
         })
@@ -88,44 +92,21 @@
         poi2_5DEl.onclick = function () {
           alert('2.5D PoiNode click')
         }
+        poi2_5DEl.ontouchend = function () {
+          alert('2.5D PoiNode click')
+        }
 
         ssp.createPoiNode({
           type: '2.5D',
           id: '2.5DPoiNode',
           position: {
             x: 0,
-            y: 40,
+            y: 0,
             z: 0
-          },
-          scale: {
-            width: 2,
-            height: 2
-          },
-          level: {
-            max: 5000,
-            min: 300
           },
           element: poi2_5DEl
         })
 
-        ssp.createPoiNode({
-          type: '2.5D',
-          id: '2.5111DPoiNode',
-          position: {
-            x: 500,
-            y: 400,
-            z: 500
-          },
-          scale: {
-            width: 4,
-            height: 4
-          },
-          level: {
-            max: 5000,
-            min: 300
-          },
-          element: poi2_5DEl.cloneNode(true)
-        })
       }
     })
 
@@ -138,18 +119,17 @@
         poi3DEl.onclick = function () {
           alert('3D PoiNode click')
         }
+        poi3DEl.ontouchend = function () {
+          alert('3D PoiNode click')
+        }
 
         ssp.createPoiNode({
           type: '3D',
           id: '3DPoiNode',
           position: {
-            x: -200,
-            y: 40,
-            z: -200
-          },
-          level: {
-            max: 5000,
-            min: 300
+            x: 1000,
+            y: 0,
+            z: 0
           },
           element: poi3DEl
         })
